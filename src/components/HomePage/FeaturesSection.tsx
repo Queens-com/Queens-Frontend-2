@@ -17,13 +17,13 @@ const FeaturesSection = () => {
         <FeatureCard
           description="Our return policy is simple and that is why customers love our shop"
           title="Easy Returns"
-          image={star}
+          image={returns}
           imageAlt="Easy Returns"
         />
         <FeatureCard
           description="We offer amazing customer service no matter what happens"
           title="Customer Service"
-          image={star}
+          image={services}
           imageAlt="Customer Service"
         />
       </div>
