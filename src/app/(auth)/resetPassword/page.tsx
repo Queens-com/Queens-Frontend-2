@@ -1,4 +1,5 @@
 import ResetPassword from "@/components/Authentication/PasswordReset/ResetPassword";
+import { Metadata } from "next";
 import React from "react";
 
 const resetPassword = () => {
@@ -7,6 +8,10 @@ const resetPassword = () => {
       <ResetPassword />
     </div>
   );
+};
+
+export const metadata: Metadata = {
+  title: "Reset",
 };
 
 export default resetPassword;

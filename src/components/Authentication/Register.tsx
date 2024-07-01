@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import Link from "next/link";
 import apple from "../../../public/apple.png";
@@ -7,47 +7,64 @@ import google from "../../../public/google.png";
 import queensLogo from "../../../public/Q.png";
 import { useState } from "react";
 import Image from "next/image";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import FormError from "../Errors/FormError";
+import { snackbar } from "../Toaster";
+import queens from "@/config/queens";
+import { apiRoutes, routes } from "@/config/routes";
+import { useRouter } from "next/navigation";
+
+const registerSchema: yup.ObjectSchema<FieldValues> = yup.object({
+  email: yup
+    .string()
+    .email()
+    .required()
+    .label("Email Address")
+    .trim()
+    .nullable(),
+
+  firstName: yup.string().required().label("First Name").trim().nullable(),
+  lastName: yup.string().required().label("Last Name").trim().nullable(),
+  password: yup.string().required().label("Password").trim(),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Passwords must match")
+    .required()
+    .label("Confirm Password")
+    .trim(),
+});
 
 function Register() {
+  const router = useRouter();
+  const { auth } = apiRoutes;
   const [showModal, setShowModal] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
 
-  //   const handleSubmit = async (event) => {
-  //     event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(registerSchema),
+  });
 
-  //     const formData = new FormData(event.target);
 
-  //     const data = {
-  //       first_name: formData.get("firstName"),
-  //       last_name: formData.get("lastName"),
-  //       middle_name: formData.get("middleName"),
-  //       email: formData.get("email"),
-  //       country: formData.get("country"),
-  //       country_code: formData.get("countryCode"),
-  //       phone: formData.get("phoneNumber"),
-  //       password: formData.get("password"),
-  //       profile_photo: formData.get("profilePicture"),
-  //     };
-
-  //     try {
-  //       const response = await axios.post("/accRegister", data);
-  //       console.log(response.data);
-  //       navigate("/");
-  //     } catch (error) {
-  //       console.error("There was an error signing up.", error.response || error);
-
-  //       const errorMessage =
-  //         error.response?.data?.detail ||
-  //         "An error occurred during signup. Please try again.";
-  //       setErrorMessage(errorMessage);
-  //       setShowModal(true);
-
-  //       setTimeout(() => {
-  //         setShowModal(false);
-  //         setErrorMessage("");
-  //       }, 5000);
-  //     }
-  //   };
+  const onSubmit: SubmitHandler<FieldValues> = async (payload) => {
+    try {
+      console.log(payload);
+      await queens.post(auth.signup, payload);
+      snackbar({
+        description:
+          "Congratulations! You've completed the sign-up process. The next step is to verify your email",
+        message: "Registration Successful",
+      });
+      router.push(routes.otp);
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
 
   return (
     <div className="grid justify-center">
@@ -63,51 +80,61 @@ function Register() {
               Let’s get you started!
             </h1>
             <div className="flex items-center justify-between gap-2 ms-4 me-4">
-              <p className="font-semibold text-gray-600 text-sm md:text-md ">
+              <div className="w-1/3 h-[1px] bg-black"></div>
+              <p className="font-semibold text-gray-600 text-xs md:text-md text-center">
                 Sign up with
               </p>
+              <div className="w-1/3 h-[1px] bg-black"></div>
             </div>
           </div>
 
           <div className="flex gap-4 items-center justify-between mt-4">
-            <div className="flex gap-2 items-center ps-2.5 pe-2.5 pt-2 pb-2 border border-black rounded-full">
+            <div className="flex gap-2 items-center py-2 px-4 border border-gray-400 rounded-full">
               <Image src={google} alt="google" />
-              <h1 className="text-gray-700 text-xs md:text-base">Google</h1>
+              <h1 className="text-gray-700 text-xs md:text-base pr-5">
+                Google
+              </h1>
             </div>
-            <div className="flex gap-2 items-center ps-2.5 pe-2.5 pt-2 pb-2 border border-black rounded-full">
+            <div className="flex gap-2 items-center py-2 px-4 border border-gray-400 rounded-full">
               <Image src={apple} alt="apple" />
-              <h1 className="text-gray-700 text-xs md:text-base">Apple</h1>
+              <h1 className="text-gray-700 text-xs md:text-base pr-4">Apple</h1>
             </div>
-            <div className="flex gap-2 items-center ps-2.5 pe-2.5 pt-2 pb-2 border border-black rounded-full">
-              <Image src={facebook} alt="facebook" />
-              <h1 className="text-gray-700 text-xs md:text-base">Facebook</h1>
+            <div className="flex gap-2 items-center py-2 px-2 border border-gray-400 rounded-full">
+              <Image src={facebook} alt="facebook" className="w-max" />
+              <h1 className="text-gray-700 text-xs md:text-base pr-7">
+                Facebook
+              </h1>
             </div>
           </div>
 
-          <form className="grid gap-3 mt-4">
+          <form className="grid gap-4 mt-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="grid gap-1.5">
               <label htmlFor="email" className="font-medium text-sm text-left">
                 First Name
               </label>
               <input
-                name="firstName"
+                {...register("firstName")}
                 type="text"
                 placeholder="e.g John"
                 className="bg-gray-100 rounded-full pt-2 pb-2 ps-4 pe-4 placeholder:font-normal placeholder:text-sm"
-                required
               />
+              {errors.firstName ? (
+                <FormError message={errors.firstName.message} />
+              ) : null}
             </div>
             <div className="grid gap-1.5">
               <label htmlFor="email" className="font-medium text-sm text-left">
                 Last Name
               </label>
               <input
-                name="lastName"
+                {...register("lastName")}
                 type="text"
                 placeholder="e.g Doe"
                 className="bg-gray-100 rounded-full pt-2 pb-2 ps-4 pe-4 placeholder:font-normal placeholder:text-sm"
-                required
               />
+              {errors.lastName ? (
+                <FormError message={errors.lastName.message} />
+              ) : null}
             </div>
 
             <div className="grid gap-1.5">
@@ -115,12 +142,14 @@ function Register() {
                 Email
               </label>
               <input
-                name="email"
+                {...register("email")}
                 type="email"
                 placeholder="yourname@email.com"
                 className="bg-gray-100 rounded-full pt-2 pb-2 ps-4 pe-4 placeholder:font-normal placeholder:text-sm"
-                required
               />
+              {errors.email ? (
+                <FormError message={errors.email.message} />
+              ) : null}
             </div>
 
             <div className="grid gap-1.5">
@@ -131,11 +160,14 @@ function Register() {
                 Password
               </label>
               <input
-                name="password"
+                {...register("password")}
                 type="password"
                 placeholder="Enter password"
                 className="bg-gray-100 rounded-full pt-2 pb-2 ps-4 pe-4 placeholder:font-normal placeholder:text-sm"
               />
+              {errors.password ? (
+                <FormError message={errors.password.message} />
+              ) : null}
             </div>
             <div className="grid gap-1.5">
               <label
@@ -145,11 +177,14 @@ function Register() {
                 Confirm Password
               </label>
               <input
-                name="confirmPassword"
+                {...register("confirmPassword")}
                 type="password"
                 placeholder="Enter password"
                 className="bg-gray-100 rounded-full pt-2 pb-2 ps-4 pe-4 placeholder:font-normal placeholder:text-sm"
               />
+              {errors.confirmPassword ? (
+                <FormError message={errors.confirmPassword.message} />
+              ) : null}
             </div>
             <div className="grid gap-1.5">
               <p className="font-medium text-xs">
