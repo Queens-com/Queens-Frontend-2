@@ -1,11 +1,23 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import queensLogo from "../../../public/Q.png";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { routes } from "@/config/routes";
 const userEmail = "tobymacqueen@gmail.com";
 
 const RegisterSuccess = () => {
-  
+  const router = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.push(routes.home);
+    }, 5000);
+
+    // Cleanup the timer if the component is unmounted before the timeout
+    return () => clearTimeout(timer);
+  }, [router]);
+
   return (
     <div className="grid items-center justify-center min-h-screen px-4">
       <div className="grid items-center justify-center w-full">

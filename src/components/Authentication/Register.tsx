@@ -15,6 +15,8 @@ import { snackbar } from "../Toaster";
 import queens from "@/config/queens";
 import { apiRoutes, routes } from "@/config/routes";
 import { useRouter } from "next/navigation";
+import { CountryInput } from "../Inputs/CountryInput";
+import { constants } from "@/config/constants";
 
 const registerSchema: yup.ObjectSchema<FieldValues> = yup.object({
   email: yup
@@ -26,6 +28,7 @@ const registerSchema: yup.ObjectSchema<FieldValues> = yup.object({
     .nullable(),
 
   firstName: yup.string().required().label("First Name").trim().nullable(),
+  country: yup.string().required().label("Country").trim().nullable(),
   lastName: yup.string().required().label("Last Name").trim().nullable(),
   password: yup.string().required().label("Password").trim(),
   confirmPassword: yup
@@ -37,11 +40,14 @@ const registerSchema: yup.ObjectSchema<FieldValues> = yup.object({
 });
 
 function Register() {
+  const { COUNTRY_LIST } = constants;
+
   const router = useRouter();
   const { auth } = apiRoutes;
   const [showModal, setShowModal] = useState(false);
 
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -49,17 +55,26 @@ function Register() {
     resolver: yupResolver(registerSchema),
   });
 
-
   const onSubmit: SubmitHandler<FieldValues> = async (payload) => {
     try {
-      console.log(payload);
-      await queens.post(auth.signup, payload);
+      const body = {
+        email: payload.email,
+        password: payload.password,
+        phone: "",
+        country_code: "",
+        first_name: payload.firstName,
+        last_name: payload.lastName,
+        middle_name: "",
+        profile_photo: "",
+        country: "",
+      };
+      await queens.post(auth.signup, body);
       snackbar({
         description:
           "Congratulations! You've completed the sign-up process. The next step is to verify your email",
         message: "Registration Successful",
       });
-      router.push(routes.otp);
+      router.push(`${routes.otp}?email=${payload.email}`);
     } catch (error) {
       console.log(error);
       return error;
@@ -151,6 +166,37 @@ function Register() {
                 <FormError message={errors.email.message} />
               ) : null}
             </div>
+            <div className="grid gap-1.5">
+              <label htmlFor="email" className="font-medium text-sm text-left">
+                Country
+              </label>
+              <CountryInput
+                items={COUNTRY_LIST.sort((a, b) => {
+                  return a.name.localeCompare(b.name, undefined, {
+                    sensitivity: "base",
+                  });
+                })}
+                base={
+                  "bg-gray-100 rounded-full pt-2 pb-2 ps-4 pe-4 placeholder:font-normal placeholder:text-sm w-full h-10"
+                }
+                // field={...register("email")}
+                control={control}
+                name="country"
+                loading={false}
+                isDisabled={false}
+                disableKeys={[""]}
+                showSearch={true}
+              />
+              {/* <input
+                {...register("email")}
+                type="email"
+                placeholder="yourname@email.com"
+                className="bg-gray-100 rounded-full pt-2 pb-2 ps-4 pe-4 placeholder:font-normal placeholder:text-sm"
+              /> */}
+              {errors.country ? (
+                <FormError message={errors.country.message} />
+              ) : null}
+            </div>
 
             <div className="grid gap-1.5">
               <label
@@ -199,9 +245,10 @@ function Register() {
             </div>
             <button
               type="submit"
+              disabled={isSubmitting}
               className=" hover:bg-[#1E1E1E] text-[#1E1E1E] bg-[#F5F5F5] hover:text-white pt-2 pb-2 ps-4 pe-4 placeholder:font-normal placeholder:text-sm rounded-full"
             >
-              Sign up
+              {isSubmitting ? "Signing up..." : "Sign up"}
             </button>
           </form>
 

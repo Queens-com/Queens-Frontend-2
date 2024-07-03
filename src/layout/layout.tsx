@@ -17,7 +17,7 @@ const Layout = ({ children }: WrapperProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div>
+    <div className="2xl:max-w-[1440px] mx-auto">
       <nav className="w-full bg-white px-2 md:px-20 shadow-sm ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="flex items-center justify-between h-16">

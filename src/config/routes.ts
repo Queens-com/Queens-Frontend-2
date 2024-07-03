@@ -11,6 +11,9 @@ export const apiRoutes = {
     sendOtp: `${serviceRoot.auth}/send_otp`,
     verifyOtp: `${serviceRoot.auth}/verify_otp`,
   },
+  user: {
+    activate: `${serviceRoot.auth}/activate`,
+  },
 };
 
 export const routes = {
