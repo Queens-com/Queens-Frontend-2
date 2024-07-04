@@ -6,8 +6,8 @@ import star from "../../../public/star.png";
 
 const FeaturesSection = () => {
   return (
-    <div className="px-24">
-      <div className="grid sm:grid-cols-3 justify-between items-center">
+    <div className="md:px-24 p-2 pb-6">
+      <div className="grid md:grid-cols-3 justify-between items-center">
         <FeatureCard
           description="All of our products go through very strict inspection before we dispatch them"
           title="High Quality"

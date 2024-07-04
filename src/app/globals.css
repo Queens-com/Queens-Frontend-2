@@ -2,3 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.bg-backLuxury-blur {
+  background: linear-gradient(
+      rgba(220, 220, 220, 0.1),
+      rgba(220, 220, 220, 220)
+    ),
+    url("/handLuxury.png");
+  background-size: cover;
+  background-position: center;
+}

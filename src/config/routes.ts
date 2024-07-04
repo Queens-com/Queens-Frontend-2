@@ -16,6 +16,9 @@ export const apiRoutes = {
   },
 };
 
+const ROUTE_PREFIX = {
+  stores: "/stores",
+};
 export const routes = {
   home: "/",
   login: "/login",
@@ -26,4 +29,13 @@ export const routes = {
   resetPassword: "/resetPassword",
   resetPasswordEmail: "/resetPasswordEmail",
   resetSuccess: "/resetSuccess",
+  stores: {
+    index: ROUTE_PREFIX.stores,
+    dior: `${ROUTE_PREFIX.stores}/dior`,
+    gucci: `${ROUTE_PREFIX.stores}/gucci`,
+    louis_vitton: `${ROUTE_PREFIX.stores}/louis_vitton`,
+    versace: `${ROUTE_PREFIX.stores}/versace`,
+    cartier: `${ROUTE_PREFIX.stores}/cartier`,
+    hermes: `${ROUTE_PREFIX.stores}/hermes`,
+  },
 };

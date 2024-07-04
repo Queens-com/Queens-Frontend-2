@@ -1,3 +1,5 @@
+import { routes } from "./routes";
+
 const API = {
   baseURL: "http://46.101.5.60",
   timeout: 60000,
@@ -3558,6 +3560,29 @@ const COUNTRY_CODE_LIST = [
     dial_code: "998",
     emoji: "🇺🇿",
     name: "Uzbekistan",
+  },
+];
+
+export const STORES = [
+  {
+    name: "dior",
+    link: routes.stores.dior,
+  },
+  {
+    name: "gucci",
+    link: routes.stores.gucci,
+  },
+  {
+    name: "louis vuitton",
+    link: routes.stores.louis_vitton,
+  },
+  {
+    name: "cartier",
+    link: routes.stores.cartier,
+  },
+  {
+    name: "hermer",
+    link: routes.stores.hermes,
   },
 ];
 

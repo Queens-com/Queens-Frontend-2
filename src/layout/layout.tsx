@@ -8,6 +8,15 @@ import { RiSearch2Line } from "react-icons/ri";
 import { GrFavorite } from "react-icons/gr";
 import { LuShoppingCart } from "react-icons/lu";
 import { IoMdMenu } from "react-icons/io";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { STORES } from "@/config/constants";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type WrapperProps = {
   children: React.ReactNode;
@@ -15,6 +24,7 @@ type WrapperProps = {
 
 const Layout = ({ children }: WrapperProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <div className="2xl:max-w-[1440px] mx-auto">
@@ -28,18 +38,37 @@ const Layout = ({ children }: WrapperProps) => {
               <div className="flex-shrink-0 cursor-pointer">
                 <Image src={Qlogo} alt="logo" className="h-10 w-auto" />
               </div>
-              <div className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
-                <IoStorefrontOutline className="text-xl" />
-                <span className="font-semibold text-sm">Stores</span>
-                <FaChevronDown
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className={`text-xl ${
-                    isMenuOpen
-                      ? "transform rotate-[90deg]"
-                      : "transform rotate-[0deg]"
-                  }`}
-                />
-              </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="aria-expanded:scale-100  outline-none">
+                  <div className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
+                    <IoStorefrontOutline className="text-xl" />
+                    <span className="font-semibold text-sm">Stores</span>
+                    <FaChevronDown
+                      className="text-xl font-extralight"
+                      // onClick={() => setIsMenuOpen(!isMenuOpen)}
+                      // className={`text-xl ${
+                      //   isMenuOpen
+                      //     ? "transform rotate-[90deg]"
+                      //     : "transform rotate-[0deg]"
+                      // }`}
+                    />
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-white">
+                  {STORES.map((item) => {
+                    return (
+                      <DropdownMenuItem
+                        onClick={() => router.push(item.link)}
+                        key={item.name}
+                        className="font-primary uppercase space-x-3 p-2"
+                      >
+                        {item.name}
+                      </DropdownMenuItem>
+                    );
+                  })}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
               <div className="flex items-center gap-2">
                 <div className="w-80 mx-4">
                   <form
@@ -77,7 +106,7 @@ const Layout = ({ children }: WrapperProps) => {
             </div>
 
             {/* Mobile Navigation */}
-            <div className="flex items-center lg:hidden">
+            <div className="flex  items-center justify-end gap-6 text-xl w-full  lg:hidden">
               <div>
                 <RiSearch2Line />
               </div>
@@ -105,21 +134,23 @@ const Layout = ({ children }: WrapperProps) => {
           <div className="lg:hidden absolute left-0 top-0 z-[2] flex flex-col pt-2 px-5 bg-white w-[100vw] h-[100vh]">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               <div className="flex justify-between mb-6 items-center">
-                <p className="bricolage font-bold text-black text-4xl">Menu</p>
+                <p className="bricolage font-bold text-black text-3xl">Menu</p>
                 <div
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
                   className="text-gray-700 hover:text-gray-900"
                 >
-                  <IoMdMenu />
+                  <IoMdMenu className="text-xl" />
                 </div>
               </div>
-
-              <div>DIOR</div>
-              <div>GUCCI</div>
-              <div>LOUIS VUTTON</div>
-              <div>VERSACE</div>
-              <div>CARTIER</div>
-              <div>HERMES</div>
+              <div className="flex flex-col gap-6 uppercase ">
+                {STORES.map((item) => {
+                  return (
+                    <Link key={item.name} href={`${item.link}`}>
+                      {item.name}
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
             <div className="absolute bottom-5 flex w-[90vw] space-x-2 px-2">
               <div className="basis-1/2 bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">
@@ -132,10 +163,10 @@ const Layout = ({ children }: WrapperProps) => {
           </div>
         )}
 
-        {/* Dexktop Dropdown */}
-        {isMenuOpen && (
+        {/* Dexktop Dropdown  not needed , check up, alreday there*/}
+        {/* {isMenuOpen && (
           <div className="hidden lg:absolute lg:flex flex-col left-40 top-14 z-[2] pt-2 px-5 bg-transparent w-auto h-auto">
-            <div className="flex flex-col px-2 pt-2 pb-3 space-y-1 md:space-y-0 sm:px-3">
+            <div className="flex flex-col px-2 pt-2 pb-3 space-y-1 md:space-y-0 sm:px-3 shadow-2xl">
               <div>DIOR</div>
               <div>GUCCI</div>
               <div>LOUIS VUTTON</div>
@@ -144,11 +175,11 @@ const Layout = ({ children }: WrapperProps) => {
               <div>HERMES</div>
             </div>
           </div>
-        )}
+        )} */}
       </nav>
       <div>{children}</div>
-      <footer className="md:px-20 px-4">
-        <div className="grid sm:grid-cols-4 grid-cols-2 justify-between">
+      <footer className="md:px-20 px-4 py-6">
+        <div className="grid sm:grid-cols-4 grid-cols-2 gap-10 justify-between">
           <div>
             <h2 className="font-bold text-base mb-4">Company</h2>
             <ul className="text-base space-y-1.5">

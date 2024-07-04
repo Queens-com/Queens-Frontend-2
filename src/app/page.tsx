@@ -4,6 +4,7 @@ import Intro from "@/components/HomePage/Intro";
 import NewArrivals from "@/components/HomePage/NewArrivals";
 import ShopNow from "@/components/HomePage/ShopNow";
 import Layout from "@/layout/layout";
+import { Metadata } from "next";
 
 export default function Home() {
   return (
@@ -13,10 +14,14 @@ export default function Home() {
           <Intro />
           <FeaturesSection />
           <NewArrivals />
-          <ShopNow/>
-          <FAQs/>
+          <ShopNow />
+          <FAQs />
         </div>
       </Layout>
     </div>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Home",
+};
