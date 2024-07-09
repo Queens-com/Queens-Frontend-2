@@ -1,7 +1,7 @@
 import { routes } from "./routes";
 
 const API = {
-  baseURL: "http://46.101.5.60",
+  baseURL: "https://test.luravpn.com",
   timeout: 60000,
 };
 

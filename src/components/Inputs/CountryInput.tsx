@@ -62,12 +62,7 @@ export function CountryInput({
   isDisabled,
   readOnly,
   searchFunction,
-}: // searchFunction = (value: string, search: string) => {
-//   const itemValue = items?.find((item) => item.value === value)?.label;
-//   if (itemValue?.toLowerCase().includes(search.toLowerCase())) return 1;
-//   return 0;
-// },
-SelectProps) {
+}: SelectProps) {
   const [open, setOpen] = React.useState(false);
   const { field, fieldState } = useController({
     control,
@@ -76,7 +71,6 @@ SelectProps) {
   });
   const { error } = fieldState;
   const fieldValue = field.value ?? "";
-  console.log(items, field);
 
   return (
     <Popover

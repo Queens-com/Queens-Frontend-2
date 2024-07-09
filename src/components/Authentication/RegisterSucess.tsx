@@ -11,8 +11,8 @@ const RegisterSuccess = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.push(routes.home);
-    }, 5000);
+      router.push(routes.login);
+    }, 3000);
 
     // Cleanup the timer if the component is unmounted before the timeout
     return () => clearTimeout(timer);
@@ -27,7 +27,7 @@ const RegisterSuccess = () => {
               <Image src={queensLogo} alt="backImg" />
             </div>
           </div>
-          <div>
+          <div className="text-center">
             <h1 className="font-bold text-3xl mb-1">
               Congrats, your account is set
             </h1>

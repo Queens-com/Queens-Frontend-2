@@ -13,7 +13,9 @@ import FormError from "../Errors/FormError";
 import { snackbar } from "../Toaster";
 import queens from "@/config/queens";
 import { apiRoutes, routes } from "@/config/routes";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 
 const loginSchema: yup.ObjectSchema<FieldValues> = yup.object({
   email: yup
@@ -27,6 +29,10 @@ const loginSchema: yup.ObjectSchema<FieldValues> = yup.object({
 });
 
 function Login() {
+  const callbackUrl = useSearchParams().get("callbackUrl");
+  // const { data } = useSession();
+  // const demo = data;
+  // console.log(demo);
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
   const { auth } = apiRoutes;
@@ -41,18 +47,27 @@ function Login() {
 
   const onSubmit: SubmitHandler<FieldValues> = async (payload) => {
     try {
-      await queens.post(auth.login, payload);
+      const { data } = await queens.post(auth.login, payload);
+      console.log(data.token);
       snackbar({
-        description:
-          "Congratulations! You've completed the sign-up process. The next step is to verify your email",
-        message: "Registration Successful",
+        description: "Logging in",
+        message: "Login Successful",
       });
-      router.push(routes.otp);
+      await signIn("update-jwt", {
+        accessToken: data?.token,
+        callbackUrl: callbackUrl || routes.home,
+        redirect: false,
+      });
+
+      snackbar({
+        description: "Welcome back to Queens. Enjoy the exciting features",
+        message: "Sucessfully Logged In",
+      });
+      router.push(callbackUrl || routes.home);
     } catch (error) {
       console.log(error);
       return error;
     }
-    console.log(payload);
   };
 
   return (
@@ -151,7 +166,7 @@ function Login() {
               type="submit"
               className=" hover:bg-[#1E1E1E] text-[#1E1E1E] bg-[#F5F5F5] hover:text-white pt-2 pb-2 ps-4 pe-4 placeholder:font-normal placeholder:text-sm rounded-full"
             >
-              Login
+              {isSubmitting ? "Logging in..." : "Login"}
             </button>
           </form>
 

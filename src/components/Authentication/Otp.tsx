@@ -45,7 +45,6 @@ const OTP = () => {
       return err;
     },
     onSuccess: (data) => {
-      console.log(data);
       snackbar({
         description: "Check your email for your OTP",
         message: "OTP Sent!",
@@ -54,9 +53,9 @@ const OTP = () => {
     },
   });
 
-  const [otpValues, setOtpValues] = useState(["", "", "", ""]);
+  const [otpValues, setOtpValues] = useState(["", "", "", "", "", ""]);
   const otpInputs: React.RefObject<HTMLInputElement>[] = Array.from(
-    { length: 4 },
+    { length: 6 },
     () => useRef<HTMLInputElement>(null)
   );
 
@@ -67,7 +66,7 @@ const OTP = () => {
       setOtpValues(newOtpValues);
     }
 
-    if (index < 3 && value !== "") {
+    if (index < 5 && value !== "") {
       otpInputs[index + 1]?.current?.focus();
     } else if (
       (e.key === "Backspace" || e.key === "Delete") &&
@@ -102,17 +101,21 @@ const OTP = () => {
     data: response,
   } = useMutation({
     mutationFn: async () => {
-      const payload = { user_id: "", otp: otpValues.join("") };
+      const payload = {
+        user_id: data?.data?.user_id || "",
+        otp: otpValues.join(""),
+      };
+      console.log(payload);
       return await queens.post(auth.verifyOtp, payload);
     },
     onError: (err) => {
       return err;
     },
     onSuccess: async (data) => {
-      console.log(data);
+      console.log(data?.data?.token);
       try {
-        // const accessToken = data?.accessToken;
-        const accessToken = "";
+        const accessToken = data?.data?.token;
+        // const accessToken = "";
         const config: AxiosRequestConfig = accessToken
           ? { headers: { Authorization: `Bearer ${accessToken}` } }
           : {};
@@ -160,7 +163,7 @@ const OTP = () => {
               htmlFor="OTP"
               className="flex gap-3 flex-col text-xl text-center roboto font-bold text-active_text"
             >
-              <div className="relative grid grid-cols-4 sm:gap-6 gap-3 justify-center items-center mb-4">
+              <div className="relative grid grid-cols-6 sm:gap-6 gap-3 justify-center items-center mb-4">
                 {otpValues.map((value, index) => (
                   <input
                     key={index}
@@ -193,7 +196,7 @@ const OTP = () => {
                   {isPending ? "sending..." : "Resend"}
                 </button>
               )}
-              {error || data ? (
+              {(error || data) && countdown > 0 ? (
                 <p
                   className={`whitespace-nowrap text-xs -mt-3 -mb-5  ${
                     data ? "text-green-500" : "text-red-500"

@@ -12,3 +12,14 @@ export enum HttpStatusCode {
   BAD_GATEWAY = 502,
   SERVICE_UNAVAILABLE = 503,
 }
+
+export interface User {
+  email: string;
+  phone: string | null;
+  country_code: string | null;
+  first_name: string;
+  last_name: string;
+  middle_name: string | null;
+  country: string | null;
+  profile_photo: string | null;
+}

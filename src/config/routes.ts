@@ -13,6 +13,7 @@ export const apiRoutes = {
   },
   user: {
     activate: `${serviceRoot.auth}/activate`,
+    profile: `${serviceRoot.auth}/user_profile`,
   },
 };
 

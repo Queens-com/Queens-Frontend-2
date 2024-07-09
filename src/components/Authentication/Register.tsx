@@ -66,8 +66,10 @@ function Register() {
         last_name: payload.lastName,
         middle_name: "",
         profile_photo: "",
-        country: "",
+        country: payload.country,
       };
+      console.log(body);
+
       await queens.post(auth.signup, body);
       snackbar({
         description:

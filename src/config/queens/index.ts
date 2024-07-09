@@ -38,8 +38,7 @@ queens.interceptors.response.use(
   },
   (error) => {
     const x = error as AxiosError<{
-      message: string;
-      error: { message: string }[];
+      detail: string;
     }>;
 
     if (
@@ -56,13 +55,10 @@ queens.interceptors.response.use(
     if (x.response) {
       const { status, data } = x.response;
 
-      if (
-        status === HttpStatusCode.BAD_REQUEST &&
-        data.message === CONFIG_TEXTS.validationError
-      ) {
+      if (status === HttpStatusCode.BAD_REQUEST && data.detail) {
         snackbar.error({
-          description: data.error[0].message,
-          message: data.message,
+          description: data.detail,
+          message: "Bad Request",
         });
 
         return Promise.reject(error);
@@ -101,7 +97,7 @@ queens.interceptors.response.use(
 
       if (status === HttpStatusCode.FORBIDDEN) {
         snackbar.error({
-          description: data.message,
+          description: data.detail || "No permission to perform this action",
           message: "You do not have permission to perform this action",
         });
         return Promise.reject(error);
@@ -109,7 +105,7 @@ queens.interceptors.response.use(
     }
 
     snackbar.error({
-      description: x.response?.data.message || CONFIG_TEXTS.somethingWentWrong,
+      description: x.response?.data.detail || CONFIG_TEXTS.somethingWentWrong,
       message: CONFIG_TEXTS.error,
     });
 
