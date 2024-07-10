@@ -10,6 +10,7 @@ export const apiRoutes = {
     login: `${serviceRoot.auth}/login`,
     sendOtp: `${serviceRoot.auth}/send_otp`,
     verifyOtp: `${serviceRoot.auth}/verify_otp`,
+    changePassword: `${serviceRoot.auth}/change_password`,
   },
   user: {
     activate: `${serviceRoot.auth}/activate`,

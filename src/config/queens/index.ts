@@ -4,6 +4,7 @@ import { HttpStatusCode } from "@/types";
 import { snackbar } from "@/components/Toaster";
 import { routes } from "@/config/routes";
 import { constants } from "../constants";
+import { getSession } from "next-auth/react";
 
 const {
   API: { baseURL, timeout },
@@ -18,11 +19,12 @@ const queens = axios.create({
 });
 
 queens.interceptors.request.use(
-  (config) => {
-    const token = Cookies.get("q_tok");
+  async (config) => {
+    const session = await getSession();
+    // const token = Cookies.get("q_tok");
 
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    if (session?.accessToken) {
+      config.headers.Authorization = `Bearer ${session?.accessToken}`;
     }
 
     return config;

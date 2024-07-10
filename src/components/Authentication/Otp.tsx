@@ -9,6 +9,7 @@ import queens from "@/config/queens";
 import { apiRoutes, routes } from "@/config/routes";
 import { snackbar } from "../Toaster";
 import { AxiosRequestConfig } from "axios";
+import { IoIosArrowBack } from "react-icons/io";
 
 const OTP = () => {
   const router = useRouter();
@@ -16,6 +17,10 @@ const OTP = () => {
   const searchParams = useSearchParams();
   const routeEmail = searchParams.get("email");
   const [countdown, setCountdown] = useState(60);
+
+  const back = () => {
+    router.back();
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -142,6 +147,9 @@ const OTP = () => {
 
   return (
     <div className="grid items-center justify-center min-h-screen px-4">
+      <div className="mt-1 cursor-pointer  md:hidden" onClick={back}>
+        <IoIosArrowBack />
+      </div>
       <div className="grid items-center justify-center sm:max-w-sm w-full">
         <div className="grid">
           <div className="mb-6">
@@ -149,7 +157,13 @@ const OTP = () => {
               <Image src={queensLogo} alt="backImg" />
             </div>
           </div>
-          <div className="text-center">
+          <div
+            className="mt-8 cursor-pointer mb-4 hidden md:block"
+            onClick={back}
+          >
+            <IoIosArrowBack />
+          </div>
+          <div className="text-center md:text-left">
             <h1 className="font-bold text-2xl mb-1 text-active_text ">
               Verify Email
             </h1>

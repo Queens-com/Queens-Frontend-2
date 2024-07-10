@@ -17,12 +17,16 @@ import {
 import { STORES } from "@/config/constants";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { logoutUser } from "@/lib/utils";
+import { routes } from "@/config/routes";
 
 type WrapperProps = {
   children: React.ReactNode;
 };
 
 const Layout = ({ children }: WrapperProps) => {
+  const { data } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
@@ -85,7 +89,7 @@ const Layout = ({ children }: WrapperProps) => {
                     </div>
                   </form>
                 </div>
-                <div className="flex items-center space-x-4 text-2xl">
+                <div className="flex items-center justify-between space-x-4 text-2xl">
                   <div>
                     <FaRegUserCircle />
                   </div>
@@ -95,12 +99,29 @@ const Layout = ({ children }: WrapperProps) => {
                   <div>
                     <LuShoppingCart />
                   </div>
-                  <div className="flex-shrink-0 bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300 font-semibold text-sm">
-                    Sign up
-                  </div>
-                  <div className="text-gray-700 hover:text-gray-900 px-4 py-2 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300 font-semibold text-sm">
-                    Login
-                  </div>
+                  {data ? (
+                    <div
+                      className="flex-shrink-0 bg-red-600 text-black px-4 py-2 rounded-full hover:bg-red-300 transition duration-300 font-semibold text-sm cursor-pointer"
+                      onClick={() => logoutUser()}
+                    >
+                      Signout
+                    </div>
+                  ) : (
+                    <>
+                      <Link
+                        href={routes.register}
+                        className="flex-shrink-0 bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300 font-semibold text-sm"
+                      >
+                        Sign up
+                      </Link>
+                      <Link
+                        href={routes.login}
+                        className="text-gray-700 hover:text-gray-900 px-4 py-2 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300 font-semibold text-sm"
+                      >
+                        Login
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -152,14 +173,31 @@ const Layout = ({ children }: WrapperProps) => {
                 })}
               </div>
             </div>
-            <div className="absolute bottom-5 flex w-[90vw] space-x-2 px-2">
-              <div className="basis-1/2 bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">
-                Sign up
+            {data ? (
+              <div
+                className="flex-shrink-0 bg-red-600 text-black px-4 py-2 rounded-full hover:bg-red-300 transition duration-300 font-semibold text-sm cursor-pointer w-full"
+                onClick={async () => await logoutUser()}
+              >
+                Signout
               </div>
-              <div className="basis-1/2 text-gray-700 hover:text-gray-900 px-4 py-2 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300">
-                Login
-              </div>
-            </div>
+            ) : (
+              <>
+                <div className="absolute bottom-5 flex w-[90vw] space-x-2 px-2">
+                  <Link
+                    href={routes.register}
+                    className="basis-1/2 bg-black text-center text-white px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300"
+                  >
+                    Sign up
+                  </Link>
+                  <Link
+                    href={routes.login}
+                    className="basis-1/2 text-gray-700 text-center hover:text-gray-900 px-4 py-2 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300"
+                  >
+                    Login
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
         )}
 

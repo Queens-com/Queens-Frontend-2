@@ -171,7 +171,10 @@ function Login() {
           </form>
 
           <div className="grid gap-3 mt-4">
-            <Link href="" className="text-[15px] font-medium text-[#525252]">
+            <Link
+              href={routes.resetPasswordEmail}
+              className="text-[15px] font-medium text-[#525252]"
+            >
               Forgotten Password?
             </Link>
             <Link
