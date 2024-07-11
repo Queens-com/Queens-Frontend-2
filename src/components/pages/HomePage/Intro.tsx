@@ -1,7 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import introWoman from "../../../public/introWoman.png";
-import introChain from "../../../public/introChain.png";
+import introWoman from "../../../../public/introWoman.png";
+import introChain from "../../../../public/introChain.png";
+import Link from "next/link";
+import { routes } from "@/config/routes";
 
 const Intro = () => {
   return (
@@ -14,9 +16,11 @@ const Intro = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna.
         </p>
-        <button className="border-2 border-black rounded-full py-3 px-6 font-semibold text-lg hover:bg-black hover:text-white transition duration-300">
-          SHOP NOW
-        </button>
+        <Link href={routes.stores.index}>
+          <button className="border-2 border-black rounded-full py-3 px-6 font-semibold text-lg hover:bg-black hover:text-white transition duration-300">
+            SHOP NOW
+          </button>
+        </Link>
       </div>
       <div className="w-full md:w-3/6 sm:px-36 h-[24rem] md:h-[36rem] mt-8 md:mt-0 px-4 md:px-0">
         <div className="relative w-full h-full ">

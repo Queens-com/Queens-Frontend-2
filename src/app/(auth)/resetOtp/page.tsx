@@ -1,4 +1,4 @@
-import ResetOtp from "@/components/Authentication/PasswordReset/ResetOtp";
+import ResetOtp from "@/components/pages/Authentication/PasswordReset/ResetOtp";
 import { Metadata } from "next";
 import React from "react";
 

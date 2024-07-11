@@ -11,11 +11,11 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from "../Errors/FormError";
-import { snackbar } from "../Toaster";
+import { snackbar } from "@/components/Toaster";
 import queens from "@/config/queens";
 import { apiRoutes, routes } from "@/config/routes";
 import { useRouter } from "next/navigation";
-import { CountryInput } from "../Inputs/CountryInput";
+import { CountryInput } from "../../Inputs/CountryInput";
 import { constants } from "@/config/constants";
 
 const registerSchema: yup.ObjectSchema<FieldValues> = yup.object({

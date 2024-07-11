@@ -9,13 +9,13 @@ import Image from "next/image";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import FormError from "../Errors/FormError";
-import { snackbar } from "../Toaster";
 import queens from "@/config/queens";
 import { apiRoutes, routes } from "@/config/routes";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { getSession, useSession } from "next-auth/react";
+import { snackbar } from "@/components/Toaster";
+import FormError from "../Errors/FormError";
 
 const loginSchema: yup.ObjectSchema<FieldValues> = yup.object({
   email: yup

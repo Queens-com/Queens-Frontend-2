@@ -1,8 +1,8 @@
 import React from "react";
 import FeatureCard from "./FeatureCard";
-import returns from "../../../public/return.png";
-import services from "../../../public/service.png";
-import star from "../../../public/star.png";
+import returns from "../../../../public/return.png";
+import services from "../../../../public/service.png";
+import star from "../../../../public/star.png";
 
 const FeaturesSection = () => {
   return (

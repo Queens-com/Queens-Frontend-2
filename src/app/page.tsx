@@ -1,8 +1,8 @@
-import FAQs from "@/components/HomePage/FAQs";
-import FeaturesSection from "@/components/HomePage/FeaturesSection";
-import Intro from "@/components/HomePage/Intro";
-import NewArrivals from "@/components/HomePage/NewArrivals";
-import ShopNow from "@/components/HomePage/ShopNow";
+import FAQs from "@/components/pages/HomePage/FAQs";
+import FeaturesSection from "@/components/pages/HomePage/FeaturesSection";
+import Intro from "@/components/pages/HomePage/Intro";
+import NewArrivals from "@/components/pages/HomePage/NewArrivals";
+import ShopNow from "@/components/pages/HomePage/ShopNow";
 import Layout from "@/layout/layout";
 import { Metadata } from "next";
 

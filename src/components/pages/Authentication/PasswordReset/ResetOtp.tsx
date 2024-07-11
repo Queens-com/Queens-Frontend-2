@@ -1,17 +1,16 @@
 "use client";
 import React, { KeyboardEvent, useEffect, useRef, useState } from "react";
-import queensLogo from "../../../public/Q.png";
 import Image from "next/image";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
 import { formatTime } from "@/lib/utils";
 import queens from "@/config/queens";
 import { apiRoutes, routes } from "@/config/routes";
-import { snackbar } from "../Toaster";
+import { snackbar } from "../../../Toaster";
 import { AxiosRequestConfig } from "axios";
 import { IoIosArrowBack } from "react-icons/io";
 
-const OTP = () => {
+const ResetOtp = () => {
   const router = useRouter();
   const { auth, user } = apiRoutes;
   const searchParams = useSearchParams();
@@ -21,7 +20,6 @@ const OTP = () => {
   const back = () => {
     router.back();
   };
-
   useEffect(() => {
     const timer = setInterval(() => {
       if (countdown > 0) {
@@ -118,17 +116,31 @@ const OTP = () => {
     },
     onSuccess: async (data) => {
       console.log(data?.data?.token);
-      try {
-        const accessToken = data?.data?.token;
-        // const accessToken = "";
-        const config: AxiosRequestConfig = accessToken
-          ? { headers: { Authorization: `Bearer ${accessToken}` } }
-          : {};
-        const response = await queens.get(user.activate, config);
-        if (response) router.push(routes.registerSuccess);
-      } catch (err) {
-        return err;
+      const accessToken = data?.data?.token;
+      if (accessToken) {
+        snackbar({
+          description:
+            "OTP verification Successful, proceed to input your new password.",
+          message: "Verification Successful",
+        });
+        router.push(`${routes.resetPassword}?code=${accessToken}`);
+      } else {
+        snackbar.error({
+          description: "OTP verification failed, try again.",
+          message: "Verification Failed",
+        });
       }
+      // try {
+      //   const accessToken = data?.data?.token;
+      //   // const accessToken = "";
+      //   const config: AxiosRequestConfig = accessToken
+      //     ? { headers: { Authorization: `Bearer ${accessToken}` } }
+      //     : {};
+      //   const response = await queens.get(user.activate, config);
+      //   if (response) router.push(routes.registerSuccess);
+      // } catch (err) {
+      //   return err;
+      // }
     },
   });
 
@@ -147,16 +159,8 @@ const OTP = () => {
 
   return (
     <div className="grid items-center justify-center min-h-screen px-4">
-      <div className="mt-1 cursor-pointer  md:hidden" onClick={back}>
-        <IoIosArrowBack />
-      </div>
       <div className="grid items-center justify-center sm:max-w-sm w-full">
         <div className="grid">
-          <div className="mb-6">
-            <div className="p-1 flex justify-center">
-              <Image src={queensLogo} alt="backImg" />
-            </div>
-          </div>
           <div
             className="mt-8 cursor-pointer mb-4 hidden md:block"
             onClick={back}
@@ -177,7 +181,7 @@ const OTP = () => {
               htmlFor="OTP"
               className="flex gap-3 flex-col text-xl text-center roboto font-bold text-active_text"
             >
-              <div className="relative grid grid-cols-6 sm:gap-6 gap-3 justify-center items-center mb-4">
+              <div className="relative grid grid-cols-6 sm:gap-2 gap-1 justify-center items-center mb-4">
                 {otpValues.map((value, index) => (
                   <input
                     key={index}
@@ -234,4 +238,4 @@ const OTP = () => {
   );
 };
 
-export default OTP;
+export default ResetOtp;

@@ -1,4 +1,4 @@
-import Register from "@/components/Authentication/Register";
+import Register from "@/components/pages/Authentication/Register";
 import { Metadata } from "next";
 import React from "react";
 

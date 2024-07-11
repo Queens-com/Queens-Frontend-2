@@ -1,4 +1,4 @@
-import OTP from "@/components/Authentication/Otp";
+import OTP from "@/components/pages/Authentication/Otp";
 import { Metadata } from "next";
 import React from "react";
 

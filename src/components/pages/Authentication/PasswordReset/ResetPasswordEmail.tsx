@@ -7,7 +7,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { routes } from "@/config/routes";
 import * as yup from "yup";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import FormError from "@/components/Errors/FormError";
+import FormError from "@/components/pages/Errors/FormError";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 

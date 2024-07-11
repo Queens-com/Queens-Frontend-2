@@ -1,5 +1,5 @@
 import { routes } from "./routes";
-
+// import cart from "../../public/logo/cartier-logo.png"
 const API = {
   baseURL: "https://test.luravpn.com",
   timeout: 60000,
@@ -3567,22 +3567,81 @@ export const STORES = [
   {
     name: "dior",
     link: routes.stores.dior,
+    disabled: false,
+    image: "/logo/dior-logo.png",
   },
   {
     name: "gucci",
     link: routes.stores.gucci,
+    disabled: false,
+    image: "/logo/gucci-logo.png",
   },
   {
     name: "louis vuitton",
     link: routes.stores.louis_vitton,
+    disabled: false,
+    image: "/logo/lv-logo.png",
+  },
+  {
+    name: "versace",
+    link: routes.stores.versace,
+    disabled: false,
+    image: "/logo/versace-logo.png",
   },
   {
     name: "cartier",
     link: routes.stores.cartier,
+    disabled: false,
+    image: "/logo/cartier-logo.png",
   },
   {
-    name: "hermer",
+    name: "hermes",
     link: routes.stores.hermes,
+    disabled: false,
+    image: "/logo/hermes-logo.png",
+  },
+];
+
+const STORE_FILTERS = [
+  {
+    name: "price",
+    options: ["10,000 - 100,000", "10,000 - 100,000"],
+    disabled: false,
+  },
+  {
+    name: "collections",
+    options: ["earrings", "necklace", "bracelets"],
+    disabled: false,
+  },
+  {
+    name: "insert ",
+    options: ["yellow", "gold", "silver"],
+    disabled: false,
+  },
+  {
+    name: "insert color",
+    options: ["yellow", "gold", "silver"],
+    disabled: false,
+  },
+  {
+    name: "metal",
+    options: ["yellow", "gold", "silver"],
+    disabled: false,
+  },
+  {
+    name: "metal color",
+    options: ["yellow", "gold", "silver"],
+    disabled: false,
+  },
+  {
+    name: "category",
+    options: ["fine earrings", "fashion earings", "silver earrings"],
+    disabled: false,
+  },
+  {
+    name: "size",
+    options: ["8", "10", "12"],
+    disabled: false,
   },
 ];
 
@@ -3592,4 +3651,5 @@ export const constants = {
   CONFIG_TEXTS,
   COUNTRY_CODE_LIST,
   COUNTRY_LIST,
+  STORE_FILTERS,
 };

@@ -1,4 +1,4 @@
-import RegisterSuccess from "@/components/Authentication/RegisterSucess";
+import RegisterSuccess from "@/components/pages/Authentication/RegisterSucess";
 import { Metadata } from "next";
 import React from "react";
 

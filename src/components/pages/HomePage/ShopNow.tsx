@@ -1,3 +1,5 @@
+import { routes } from "@/config/routes";
+import Link from "next/link";
 import React from "react";
 
 const ShopNow = () => {
@@ -14,9 +16,11 @@ const ShopNow = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna.
             </p>
-            <button className="font-inter border-2 border-white rounded-full px-6 py-2 sm:py-3 mt-2 font-semibold text-sm sm:text-base transition-colors duration-300 hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50">
-              SHOP NOW
-            </button>
+            <Link href={routes.stores.index}>
+              <button className="font-inter border-2 border-white rounded-full px-6 py-2 sm:py-3 mt-2 font-semibold text-sm sm:text-base transition-colors duration-300 hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50">
+                SHOP NOW
+              </button>
+            </Link>
           </div>
         </div>
       </div>

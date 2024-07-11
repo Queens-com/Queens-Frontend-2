@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import Qlogo from "../../public/Qsmall.png";
 import Image from "next/image";
 import { IoStorefrontOutline } from "react-icons/io5";
-import { FaChevronDown, FaRegUserCircle } from "react-icons/fa";
+import { IoIosClose, IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { FaRegUserCircle } from "react-icons/fa";
 import { RiSearch2Line } from "react-icons/ri";
 import { GrFavorite } from "react-icons/gr";
 import { LuShoppingCart } from "react-icons/lu";
@@ -28,6 +29,7 @@ type WrapperProps = {
 const Layout = ({ children }: WrapperProps) => {
   const { data } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [arrow, setArrow] = useState(false);
   const router = useRouter();
 
   return (
@@ -36,26 +38,24 @@ const Layout = ({ children }: WrapperProps) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-
+            <div className="flex-shrink-0 cursor-pointer lg:hidden">
+              <Image src={Qlogo} alt="logo" className="h-10 w-auto" />
+            </div>
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center justify-between flex-grow">
               <div className="flex-shrink-0 cursor-pointer">
                 <Image src={Qlogo} alt="logo" className="h-10 w-auto" />
               </div>
-              <DropdownMenu>
+              <DropdownMenu open={arrow} onOpenChange={() => setArrow(!arrow)}>
                 <DropdownMenuTrigger className="aria-expanded:scale-100  outline-none">
                   <div className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
                     <IoStorefrontOutline className="text-xl" />
                     <span className="font-semibold text-sm">Stores</span>
-                    <FaChevronDown
-                      className="text-xl font-extralight"
-                      // onClick={() => setIsMenuOpen(!isMenuOpen)}
-                      // className={`text-xl ${
-                      //   isMenuOpen
-                      //     ? "transform rotate-[90deg]"
-                      //     : "transform rotate-[0deg]"
-                      // }`}
-                    />
+                    {arrow ? (
+                      <IoIosArrowUp className="text-xl font-extralight cursor-pointer" />
+                    ) : (
+                      <IoIosArrowDown className="text-xl font-extralight cursor-pointer" />
+                    )}
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-white">
@@ -152,8 +152,8 @@ const Layout = ({ children }: WrapperProps) => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden absolute left-0 top-0 z-[2] flex flex-col pt-2 px-5 bg-white w-[100vw] h-[100vh]">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <div className="lg:hidden absolute left-0 top-0 z-30 flex flex-col pt-2 px-5 bg-white w-[100vw] min-h-[100vh] pb-2">
+            <div className="px-2 mt-6 pb-3 space-y-1 sm:px-3">
               <div className="flex justify-between mb-6 items-center">
                 <p className="bricolage font-bold text-black text-3xl">Menu</p>
                 <div
@@ -175,7 +175,7 @@ const Layout = ({ children }: WrapperProps) => {
             </div>
             {data ? (
               <div
-                className="flex-shrink-0 bg-red-600 text-black px-4 py-2 rounded-full hover:bg-red-300 transition duration-300 font-semibold text-sm cursor-pointer w-full"
+                className="flex-shrink-0 bg-red-600 text-black px-4 py-2 rounded-full hover:bg-red-300 transition duration-300 font-semibold text-sm cursor-pointer w-full text-center"
                 onClick={async () => await logoutUser()}
               >
                 Signout
