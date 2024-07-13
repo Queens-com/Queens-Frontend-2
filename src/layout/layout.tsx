@@ -34,18 +34,21 @@ const Layout = ({ children }: WrapperProps) => {
 
   return (
     <div className="2xl:max-w-[1440px] mx-auto">
-      <nav className="w-full bg-white px-2 md:px-20 shadow-sm ">
+      <nav className="w-full bg-white px-2 lg:px-20 md:px-10 shadow-sm ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex-shrink-0 cursor-pointer lg:hidden">
+            <Link
+              href={routes.home}
+              className="flex-shrink-0 cursor-pointer lg:hidden"
+            >
               <Image src={Qlogo} alt="logo" className="h-10 w-auto" />
-            </div>
+            </Link>
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center justify-between flex-grow">
-              <div className="flex-shrink-0 cursor-pointer">
+              <Link href={routes.home} className="flex-shrink-0 cursor-pointer">
                 <Image src={Qlogo} alt="logo" className="h-10 w-auto" />
-              </div>
+              </Link>
               <DropdownMenu open={arrow} onOpenChange={() => setArrow(!arrow)}>
                 <DropdownMenuTrigger className="aria-expanded:scale-100  outline-none">
                   <div className="flex items-center gap-2 text-gray-700 hover:text-gray-900">

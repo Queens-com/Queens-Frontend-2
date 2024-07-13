@@ -1,10 +1,6 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import apple from "../../../public/apple.png";
-import facebook from "../../../public/facebook.png";
-import google from "../../../public/google.png";
-import queensLogo from "../../../public/Q.png";
 import { useState } from "react";
 import Image from "next/image";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -88,7 +84,9 @@ function Register() {
       <div className="grid items-center justify-center p-6 sm:max-w-sm w-full">
         <div className="text-black max-w-screen-sm m-auto text-center">
           <Image
-            src={queensLogo}
+            src={"/Q.png"}
+            width={200}
+            height={200}
             alt="logo"
             className="w-20 md:w-100 m-auto mb-8"
           />
@@ -107,17 +105,28 @@ function Register() {
 
           <div className="flex gap-4 items-center justify-between mt-4">
             <div className="flex gap-2 items-center py-2 px-4 border border-gray-400 rounded-full">
-              <Image src={google} alt="google" />
+              <Image
+                width={200}
+                height={200}
+                src={"/google.png"}
+                alt="google"
+              />
               <h1 className="text-gray-700 text-xs md:text-base pr-5">
                 Google
               </h1>
             </div>
             <div className="flex gap-2 items-center py-2 px-4 border border-gray-400 rounded-full">
-              <Image src={apple} alt="apple" />
+              <Image width={200} height={200} src={"/apple.png"} alt="apple" />
               <h1 className="text-gray-700 text-xs md:text-base pr-4">Apple</h1>
             </div>
             <div className="flex gap-2 items-center py-2 px-2 border border-gray-400 rounded-full">
-              <Image src={facebook} alt="facebook" className="w-max" />
+              <Image
+                width={200}
+                height={200}
+                src={"/facebook.png"}
+                alt="facebook"
+                className="w-max"
+              />
               <h1 className="text-gray-700 text-xs md:text-base pr-7">
                 Facebook
               </h1>

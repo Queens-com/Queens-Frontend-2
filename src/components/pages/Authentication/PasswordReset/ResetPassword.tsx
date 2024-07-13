@@ -1,17 +1,16 @@
 "use client";
 import React from "react";
-import queensLogo from "../../../../public/Q.png";
 import Image from "next/image";
 import { IoIosArrowBack } from "react-icons/io";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import FormError from "@/components/Errors/FormError";
 import { snackbar } from "@/components/Toaster";
 import queens from "@/config/queens";
 import { apiRoutes, routes } from "@/config/routes";
 import { AxiosRequestConfig } from "axios";
+import FormError from "../../Errors/FormError";
 
 const registerSchema: yup.ObjectSchema<FieldValues> = yup.object({
   password: yup.string().required().label("Password").trim(),
@@ -72,7 +71,7 @@ const ResetPassword = () => {
         <div className="grid">
           <div className="mb-6">
             <div className="p-1 flex justify-center">
-              <Image src={queensLogo} alt="backImg" />
+              <Image src={"/Q.png"} width={200} height={200} alt="backImg" />
             </div>
           </div>
           <div

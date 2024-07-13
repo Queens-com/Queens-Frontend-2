@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "@/Providers";
 import { getServerSession } from "next-auth";
+import CustomToploader from "@/components/CustomToploader";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,6 +22,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <CustomToploader color="#0A6CFF" showSpinner={false} />
         <Providers session={session}>{children}</Providers>
       </body>
     </html>

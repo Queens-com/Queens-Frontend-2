@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect } from "react";
-import queensLogo from "../../../public/Q.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { routes } from "@/config/routes";
@@ -24,7 +23,7 @@ const RegisterSuccess = () => {
         <div className="grid">
           <div className="mb-6">
             <div className="p-1 flex justify-center">
-              <Image src={queensLogo} alt="backImg" />
+              <Image src={"/Q.png"} width={200} height={200} alt="backImg" />
             </div>
           </div>
           <div className="text-center">

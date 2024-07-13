@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Stores() {
   return (
-    <main className="p-3 md:px-20 ">
+    <main className="p-3 lg:px-20 md:px-10">
       <header className="md:w-3/5">
         <p className="font-bold text-xl">Choose a Store</p>
         <p className="text-sm">
@@ -22,7 +22,7 @@ export default function Stores() {
               className={`${
                 store.disabled
                   ? "hidden"
-                  : " shadow-md w-full max-w-[21rem] h-[10rem] flex justify-center items-center border-[0.1px] rounded-sm hover:border hover:border-black"
+                  : " shadow-md w-full max-w-[21rem] h-[10rem] flex justify-center items-center border-[0.1px] rounded-md hover:border hover:border-black"
               }`}
             >
               <Image
