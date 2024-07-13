@@ -10,7 +10,7 @@ import { AxiosRequestConfig } from "axios";
 import { IoIosArrowBack } from "react-icons/io";
 import { snackbar } from "@/components/Toaster";
 
-const OTP = () => {
+const OTP: React.FC = () => {
   const router = useRouter();
   const { auth, user } = apiRoutes;
   const searchParams = useSearchParams();

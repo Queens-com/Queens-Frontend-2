@@ -39,7 +39,10 @@ export default function Filter({ cat, store }: FilterProp) {
                 <AccordionContent className="space-y-3">
                   <RadioGroup>
                     {store.options.map((opt) => (
-                      <div className="flex items-center space-x-2 capitalize">
+                      <div
+                        key={opt}
+                        className="flex items-center space-x-2 capitalize"
+                      >
                         <RadioGroupItem key={opt} value={opt} id={opt} />
                         <p key={opt}>{opt}</p>
                       </div>

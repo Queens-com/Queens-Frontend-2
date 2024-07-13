@@ -111,6 +111,7 @@ export default function Dior() {
           {category.map((cat, i) => {
             return (
               <p
+                key={cat.name}
                 onClick={() => setActive(cat.name)}
                 className={`capitalize hover:border-b-4 hover:opacity-50 hover:border-b-black pb-2 cursor-pointer ${
                   active === cat.name && "border-b-black border-b-4"
@@ -133,7 +134,10 @@ export default function Dior() {
         <section className="md:w-2/3 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-5 w-full">
           {Products.map((product) => {
             return (
-              <article className="space-y-2 max-w-[20rem] w-full shadow-sm">
+              <article
+                key={product.name}
+                className="space-y-2 max-w-[20rem] w-full shadow-sm"
+              >
                 <div>
                   <Image
                     src={product.image}

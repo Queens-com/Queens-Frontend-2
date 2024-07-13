@@ -10,7 +10,7 @@ import { snackbar } from "../../../Toaster";
 import { AxiosRequestConfig } from "axios";
 import { IoIosArrowBack } from "react-icons/io";
 
-const ResetOtp = () => {
+const ResetOtp: React.FC = () => {
   const router = useRouter();
   const { auth, user } = apiRoutes;
   const searchParams = useSearchParams();
