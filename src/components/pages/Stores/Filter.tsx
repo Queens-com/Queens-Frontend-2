@@ -18,7 +18,7 @@ interface FilterProp {
 
 export default function Filter({ cat, store }: FilterProp) {
   return (
-    <main className="w-full ">
+    <main className="w-full sticky top-0">
       <header className="sm:flex hidden gap-1 items-center capitalize text-sm ">
         <p>Stores /</p>
         <p>{store} /</p>
