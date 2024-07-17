@@ -16,6 +16,24 @@ export enum HttpStatusCode {
 export interface ErrorResponse {
   detail: string;
 }
+
+export type Price = {
+  currency: string;
+  original_price: string;
+  new_price: string;
+};
+
+export type ProductType = {
+  id: number;
+  name: string;
+  details: string;
+  reference: string;
+  description: string;
+  price: Price;
+  images: string[];
+  category: string;
+};
+
 export interface ProductArrival {
   currency?: string;
   image: string;

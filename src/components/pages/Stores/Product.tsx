@@ -19,7 +19,11 @@ export default function Product(props: ProductProp) {
     if (link) router.push(`/stores/${link}`);
   };
   return (
-    <main key={key} className="space-y-2  md:max-w-[22rem] w-full shadow-sm ">
+    <main
+      key={key}
+      className="space-y-2  md:max-w-[22rem] w-full shadow-md  rounded-sm
+    "
+    >
       <div className="relative w-full cursor-pointer">
         <Image
           src={product.image}
@@ -27,7 +31,7 @@ export default function Product(props: ProductProp) {
           width={300}
           height={300}
           alt="stock"
-          className="hover:brightness-90 w-full lg:min-h-[17rem] max-h-[17rem]  md:min-h-[17rem] sm:min-h-[13rem] xsm:min-h-[20rem] min-h-[13rem] object-cover"
+          className="hover:brightness-75 w-full lg:min-h-[17rem] max-h-[17rem]  md:min-h-[17rem] sm:min-h-[13rem] xsm:min-h-[20rem] min-h-[13rem] object-cover"
         />
         {isNew ? (
           <p className="text-[#1DA272] bg-[#c5f1e1] w-max px-1 absolute top-3 left-2 text-xs rounded-md">

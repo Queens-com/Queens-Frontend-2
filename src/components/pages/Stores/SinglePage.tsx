@@ -5,13 +5,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { routes } from "@/config/routes";
 import Product from "./Product";
+import { ProductType } from "@/types";
+import NewArrivals from "./NewArrivals";
 
 interface SinglePageProp {
-  product: any;
-  arrivals: any[];
+  product: ProductType;
 }
 
-export default function SinglePages({ product, arrivals }: SinglePageProp) {
+export default function SinglePages({ product }: SinglePageProp) {
   const [quantity, setQuantity] = useState(1);
 
   const handleIncrease = () => {
@@ -34,14 +35,17 @@ export default function SinglePages({ product, arrivals }: SinglePageProp) {
           <header className="space-y-3">
             <p className="text-3xl font-bold capitalize">{product.name}</p>
             <div className="flex justify-between items-center">
-              <p className="font-bold text-2xl">${product.price}</p>
-              <p>compare prices</p>
+              <p className="font-bold text-2xl">
+                {product.price.currency}
+                {product.price.original_price}
+              </p>
+              {/* <p>compare prices</p> */}
             </div>
           </header>
           <article className="space-y-4 py-5  border-y-[0.1px]">
-            <p className="text-sm ">{product.desc}</p>
+            <p className="text-sm ">{product.description}</p>
             <div className="flex justify-between items-center">
-              <p className="text-xs">{product.reviews} Reviews</p>
+              {/* <p className="text-xs">{product.reviews} Reviews</p> */}
               <div className="flex gap-2 items-center text-xl">
                 <CiHeart className="cursor-pointer" />
                 <CiShare2 className="cursor-pointer" />
@@ -77,10 +81,11 @@ export default function SinglePages({ product, arrivals }: SinglePageProp) {
               Product Id: <span className="font-normal">{product.id}</span>
             </p>
             <p className="text-sm font-semibold">
-              Category: <span className="font-normal">{product.category}</span>
+              Category:{" "}
+              <span className="font-normal capitalize">{product.category}</span>
             </p>
             <p className="text-sm font-semibold">
-              Delivery: <span className="font-normal">{product.delivery}</span>
+              Delivery: <span className="font-normal">{""}</span>
             </p>
           </article>
         </div>
@@ -100,22 +105,12 @@ export default function SinglePages({ product, arrivals }: SinglePageProp) {
           </button>
         </div>
         <div className="text-sm space-y-3 mt-2">
-          <p>{product.material.title}</p>
-          <p>{product.material.care}</p>
+          {/* <p>{product.material.title}</p>
+          <p>{product.material.care}</p> */}
         </div>
       </section>
       <section className="mt-16 sm:px-6 md:px-14">
-        <header className="flex justify-between items-center text-xs">
-          <p className="text-xl font-semibold">New Arrivals</p>
-          <Link href={routes.stores.index} className="">
-            See more
-          </Link>
-        </header>
-        <div className=" grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-5 w-full">
-          {arrivals.map((product) => {
-            return <Product key={product.name} product={product} />;
-          })}
-        </div>
+        <NewArrivals />
       </section>
     </main>
   );

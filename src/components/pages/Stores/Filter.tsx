@@ -14,9 +14,14 @@ const { STORE_FILTERS } = constants;
 interface FilterProp {
   cat: string;
   store: string;
+  store_filter?: {
+    name: string;
+    options: string[];
+    disabled: boolean;
+  }[];
 }
 
-export default function Filter({ cat, store }: FilterProp) {
+export default function Filter({ cat, store, store_filter }: FilterProp) {
   return (
     <main className="w-full sticky top-0">
       <header className="sm:flex hidden gap-1 items-center capitalize text-sm ">
@@ -30,28 +35,30 @@ export default function Filter({ cat, store }: FilterProp) {
       </div>
       <div>
         <Accordion type="single" collapsible className="">
-          {STORE_FILTERS.map((store, map) => {
-            return (
-              <AccordionItem value={store.name} key={store.name}>
-                <AccordionTrigger className="capitalize font-semibold">
-                  {store.name}
-                </AccordionTrigger>
-                <AccordionContent className="space-y-3">
-                  <RadioGroup>
-                    {store.options.map((opt) => (
-                      <div
-                        key={opt}
-                        className="flex items-center space-x-2 capitalize"
-                      >
-                        <RadioGroupItem key={opt} value={opt} id={opt} />
-                        <p key={opt}>{opt}</p>
-                      </div>
-                    ))}
-                  </RadioGroup>
-                </AccordionContent>
-              </AccordionItem>
-            );
-          })}
+          {store_filter
+            ? store_filter?.map((store, map) => {
+                return (
+                  <AccordionItem value={store.name} key={store.name}>
+                    <AccordionTrigger className="capitalize font-semibold">
+                      {store.name}
+                    </AccordionTrigger>
+                    <AccordionContent className="space-y-3">
+                      <RadioGroup>
+                        {store.options.map((opt) => (
+                          <div
+                            key={opt}
+                            className="flex items-center space-x-2 capitalize"
+                          >
+                            <RadioGroupItem key={opt} value={opt} id={opt} />
+                            <p key={opt}>{opt}</p>
+                          </div>
+                        ))}
+                      </RadioGroup>
+                    </AccordionContent>
+                  </AccordionItem>
+                );
+              })
+            : null}
         </Accordion>
       </div>
     </main>

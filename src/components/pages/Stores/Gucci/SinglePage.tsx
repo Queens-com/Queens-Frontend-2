@@ -11,7 +11,16 @@ import { AxiosError } from "axios";
 import { ErrorResponse, ProductType } from "@/types";
 import Errors from "../../Errors/ProductsError";
 
-type Category = "earrings" | "necklaces" | "bracelets";
+type Category =
+  | "fine_earrings"
+  | "fine_necklaces"
+  | "fine_bracelets"
+  | "silver_earrings"
+  | "silver_necklaces"
+  | "silver_bracelets"
+  | "fashion_earrings"
+  | "fashion_necklaces"
+  | "fashion_bracelets";
 const { products } = apiRoutes;
 
 export default function SinglePage() {
@@ -20,14 +29,14 @@ export default function SinglePage() {
   const cat = searchParams.get("cat") as Category;
   const id = params?.productId;
   const { data, error, isError, isFetching, isLoading } = useQuery({
-    queryKey: ["singleDior", id, cat],
+    queryKey: ["singleGucci", id, cat],
     queryFn: async () => {
-      const { data } = await queens.get(`${products.dior[`${cat}`]}/${id}`);
+      const { data } = await queens.get(`${products.gucci[`${cat}`]}/${id}`);
       return data as ProductType;
     },
   });
 
-  console.log(data, error);
+  console.log(data, error, cat);
 
   if (isLoading || isFetching) {
     return (
@@ -55,6 +64,13 @@ export default function SinglePage() {
               : "Network error"
           }
         />
+        {/* <div className="text-center text-red-400 h-[10rem]">
+          <p>
+            {axiosError && axiosError?.response?.data?.detail
+              ? axiosError?.response?.data?.detail
+              : "Network error"}
+          </p>
+        </div> */}
       </main>
     );
   }
@@ -62,7 +78,7 @@ export default function SinglePage() {
     <main className="p-3 lg:px-14 md:px-10 mt-2 mb-10 ">
       <header className="sm:flex hidden gap-1 items-center capitalize text-sm mb-8">
         <Link href={routes.stores.index}>Stores /</Link>
-        <Link href={routes.stores.dior}>Dior /</Link>
+        <Link href={routes.stores.gucci}>Gucci /</Link>
         <Link href={"#"}>{data?.name}</Link>
       </header>
       {data ? <SinglePages product={data} /> : null}
