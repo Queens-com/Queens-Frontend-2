@@ -16,6 +16,15 @@ export const apiRoutes = {
     activate: `${serviceRoot.auth}/activate`,
     profile: `${serviceRoot.auth}/user_profile`,
   },
+  products: {
+    discover: `${serviceRoot.products}/discover`,
+    search: `${serviceRoot.products}/search`,
+    dior: {
+      earrings: `${serviceRoot.products}/dior/earrings`,
+      necklace: `${serviceRoot.products}/dior/necklaces`,
+      bracelets: `${serviceRoot.products}/dior/bracelets`,
+    },
+  },
 };
 
 const ROUTE_PREFIX = {

@@ -13,8 +13,8 @@ const ShopNow = () => {
               Luxury in your hands
             </h2>
             <p className="font-roboto text-sm sm:text-base md:text-lg max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg px-2 sm:px-4 md:px-6 leading-relaxed mb-4 sm:mb-6">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna.
+              We're partnenered with top luxury women stores all over the world
+              to make this happen. How we achieved this? Its A Secret!
             </p>
             <Link href={routes.stores.index}>
               <button className="font-inter border-2 border-white rounded-full px-6 py-2 sm:py-3 mt-2 font-semibold text-sm sm:text-base transition-colors duration-300 hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50">

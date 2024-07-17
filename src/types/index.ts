@@ -13,6 +13,19 @@ export enum HttpStatusCode {
   SERVICE_UNAVAILABLE = 503,
 }
 
+export interface ErrorResponse {
+  detail: string;
+}
+export interface ProductArrival {
+  currency?: string;
+  image: string;
+  name: string;
+  price?: string;
+  reference: string;
+  store?: string;
+  category?: string;
+}
+
 export interface User {
   email: string;
   phone: string | null;

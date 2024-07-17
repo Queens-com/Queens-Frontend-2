@@ -13,8 +13,9 @@ const Intro = () => {
           Elegance at its peak
         </h1>
         <p className="mb-6 text-base font-normal leading-relaxed">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna.
+          Luxury fashion jewelry direct from our doorstep to yours, with quality
+          guaranteed and personalized service, for the ultimate shopping
+          experience.
         </p>
         <Link href={routes.stores.index}>
           <button className="border-2 border-black rounded-full py-3 px-6 font-semibold text-lg hover:bg-black hover:text-white transition duration-300">

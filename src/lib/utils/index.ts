@@ -58,3 +58,10 @@ export const logoutUser = async (url?: string) => {
     });
   }
 };
+
+export function formatUrl(ref: string, url?: string) {
+  if (url) {
+    const [brand, category] = url.split("/");
+    return `${brand}/${ref}?cat=${category}`;
+  }
+}

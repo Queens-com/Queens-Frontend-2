@@ -9,6 +9,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+      },
       backgroundImage: {
         backLuxury: "url('/handLuxury.png')",
       },
@@ -21,6 +27,7 @@ const config: Config = {
         lg: "1024px",
         md: "780px",
         sm: "690px",
+        xsm: "500px",
         smallLaptop: "1150px",
         xl: "1280px",
         xs: "350px",
@@ -38,6 +45,7 @@ const config: Config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "caret-blink": "caret-blink 1.25s ease-out infinite",
       },
     },
   },

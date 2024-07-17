@@ -3645,6 +3645,17 @@ const STORE_FILTERS = [
   },
 ];
 
+const FAQ = [
+  {
+    question: "How do I make order?",
+    answer: "click on shop now and choose the store you want to purchase from",
+  },
+  {
+    question: "How do I make order now?",
+    answer: "click on shop now and choose the store you want to purchase from",
+  },
+];
+
 export const constants = {
   API,
   ENVIRONMENT,
@@ -3652,4 +3663,5 @@ export const constants = {
   COUNTRY_CODE_LIST,
   COUNTRY_LIST,
   STORE_FILTERS,
+  FAQ,
 };

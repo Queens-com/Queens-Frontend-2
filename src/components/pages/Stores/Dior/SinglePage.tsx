@@ -21,10 +21,11 @@ export const demoProduct = {
   },
   reviews: 6,
 };
+
 export default function SinglePage() {
   const arrivals = Products.slice(0, 4);
   return (
-    <main className="p-3 lg:px-20 md:px-10 mt-2 mb-10 ">
+    <main className="p-3 lg:px-14 md:px-10 mt-2 mb-10 ">
       <header className="sm:flex hidden gap-1 items-center capitalize text-sm mb-8">
         <Link href={routes.stores.index}>Stores /</Link>
         <Link href={routes.stores.dior}>Dior /</Link>

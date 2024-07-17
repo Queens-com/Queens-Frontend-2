@@ -104,7 +104,7 @@ export default function SinglePages({ product, arrivals }: SinglePageProp) {
           <p>{product.material.care}</p>
         </div>
       </section>
-      <section className="mt-16 sm:px-6 md:px-20">
+      <section className="mt-16 sm:px-6 md:px-14">
         <header className="flex justify-between items-center text-xs">
           <p className="text-xl font-semibold">New Arrivals</p>
           <Link href={routes.stores.index} className="">

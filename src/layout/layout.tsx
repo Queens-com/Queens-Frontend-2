@@ -34,7 +34,7 @@ const Layout = ({ children }: WrapperProps) => {
 
   return (
     <div className="2xl:max-w-[1440px] mx-auto">
-      <nav className="w-full bg-white px-2 lg:px-20 md:px-10 shadow-sm ">
+      <nav className="w-full bg-white px-2 lg:px-14 md:px-10 shadow-sm ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -67,9 +67,11 @@ const Layout = ({ children }: WrapperProps) => {
                       <DropdownMenuItem
                         onClick={() => router.push(item.link)}
                         key={item.name}
-                        className="font-primary uppercase space-x-3 p-2"
+                        className={`font-primary uppercase space-x-3 p-2 ${
+                          item.disabled && "hidden"
+                        }`}
                       >
-                        {item.name}
+                        <Link href={item.link}>{item.name}</Link>
                       </DropdownMenuItem>
                     );
                   })}
@@ -169,7 +171,11 @@ const Layout = ({ children }: WrapperProps) => {
               <div className="flex flex-col gap-6 uppercase ">
                 {STORES.map((item) => {
                   return (
-                    <Link key={item.name} href={`${item.link}`}>
+                    <Link
+                      key={item.name}
+                      href={`${item.link}`}
+                      className={`${item.disabled && "hidden"}`}
+                    >
                       {item.name}
                     </Link>
                   );
@@ -219,7 +225,7 @@ const Layout = ({ children }: WrapperProps) => {
         )} */}
       </nav>
       <div>{children}</div>
-      <footer className="md:px-20 px-4 py-6">
+      <footer className="md:px-14 px-4 py-6">
         <div className="grid sm:grid-cols-4 grid-cols-2 gap-10 justify-between">
           <div>
             <h2 className="font-bold text-base mb-4">Company</h2>

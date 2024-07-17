@@ -1,24 +1,99 @@
+"use client";
 import React from "react";
-import NewCard from "./NewCard";
+import Link from "next/link";
+import { apiRoutes, routes } from "@/config/routes";
+import Product from "../Stores/Product";
+import { useQuery } from "@tanstack/react-query";
+import queens from "@/config/queens";
+import { Skeleton } from "@/components/ui/skeleton";
+import { AxiosError } from "axios";
+import { ErrorResponse, ProductArrival } from "@/types";
+import { formatUrl } from "@/lib/utils";
 
-const NewArrivals = () => {
+const { products } = apiRoutes;
+const NewArrivals: React.FC = () => {
+  const { data, error, isError, isFetching, isLoading } = useQuery({
+    queryKey: ["arrivals"],
+    queryFn: async () => {
+      const { data } = await queens.get(products.discover);
+      return data?.data as ProductArrival[];
+    },
+  });
+
+  // const products =
+
+  console.log(data, error);
+  if (isLoading || isFetching) {
+    return (
+      <main className="md:px-24 space-y-8 p-4">
+        <div className="flex justify-between items-center">
+          <h2 className="font-semibold md:text-3xl text-xl">New Arrivals</h2>
+          <Link
+            href={routes.stores.index}
+            className="font-semibold underline md:text-base text-xs"
+          >
+            See more
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-5 w-full">
+          <Skeleton className="w-full max-w-[20rem] h-[12rem]" />
+          <Skeleton className="w-full max-w-[20rem] h-[12rem]" />
+          <Skeleton className="w-full max-w-[20rem] h-[12rem]" />
+          <Skeleton className="w-full max-w-[20rem] h-[12rem]" />
+        </div>
+      </main>
+    );
+  }
+
+  if ((error as AxiosError) || isError) {
+    const axiosError = error as AxiosError<ErrorResponse>;
+    return (
+      <main className="md:px-24 space-y-8 p-4">
+        <div className="flex justify-between items-center">
+          <h2 className="font-semibold md:text-3xl text-xl">New Arrivals</h2>
+          <Link
+            href={routes.stores.index}
+            className="font-semibold underline md:text-base text-xs"
+          >
+            See more
+          </Link>
+        </div>
+        <div className="text-center text-red-400 h-[10rem]">
+          <p>
+            {axiosError && axiosError?.response?.data?.detail
+              ? axiosError?.response?.data?.detail
+              : "Network error"}
+          </p>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <div className="md:px-24 space-y-8 p-4">
       <div className="flex justify-between items-center">
-        <h2 className="font-semibold text-3xl">New Arrivals</h2>
-        <p className="font-semibold underline text-base">See more</p>
+        <h2 className="font-semibold md:text-3xl text-xl">New Arrivals</h2>
+        <Link
+          href={routes.stores.index}
+          className="font-semibold underline md:text-base text-xs"
+        >
+          See more
+        </Link>
       </div>
-      <div className="grid sm:grid-cols-4 grid-cols-2 gap-8">
-        <NewCard />
-        <NewCard />
-        <NewCard />
-        <NewCard />
-        <NewCard />
-        <NewCard />
-        <NewCard />
-        <NewCard />
-        <NewCard />
-        <NewCard />
+      <div className=" grid grid-cols-2 md:grid-cols-3  justify-between 2xl:grid-cols-4 gap-5 w-full ">
+        {data && data?.length
+          ? data.map((product) => {
+              const formatLink = formatUrl(product.reference, product.store);
+              return (
+                <Product
+                  key={product.reference}
+                  product={product}
+                  link={formatLink}
+                  isNew={true}
+                />
+              );
+            })
+          : null}
       </div>
     </div>
   );

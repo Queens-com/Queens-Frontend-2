@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Stores() {
   return (
-    <main className="p-3 lg:px-20 md:px-10">
+    <main className="p-3 lg:px-14 md:px-10">
       <header className="md:w-3/5">
         <p className="font-bold text-xl">Choose a Store</p>
         <p className="text-sm">
