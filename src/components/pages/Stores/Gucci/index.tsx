@@ -12,48 +12,48 @@ import Product from "../Product";
 import { formatUrl } from "@/lib/utils";
 import Errors from "../../Errors/ProductsError";
 
-const STORE_FILTERS = [
-  {
-    name: "price",
-    options: [],
-    disabled: false,
-  },
-  {
-    name: "collections",
-    options: [],
-    disabled: false,
-  },
-  {
-    name: "insert ",
-    options: [],
-    disabled: false,
-  },
-  {
-    name: "insert color",
-    options: [],
-    disabled: false,
-  },
-  {
-    name: "metal",
-    options: [],
-    disabled: false,
-  },
-  {
-    name: "metal color",
-    options: [],
-    disabled: false,
-  },
-  {
-    name: "category",
-    options: [],
-    disabled: false,
-  },
-  {
-    name: "size",
-    options: [],
-    disabled: false,
-  },
-];
+// const STORE_FILTERS = [
+//   {
+//     name: "price",
+//     options: [],
+//     disabled: false,
+//   },
+//   {
+//     name: "collections",
+//     options: [{ name: "", onPress: () => "" }],
+//     disabled: false,
+//   },
+//   {
+//     name: "insert ",
+//     options: [],
+//     disabled: false,
+//   },
+//   {
+//     name: "insert color",
+//     options: [],
+//     disabled: false,
+//   },
+//   {
+//     name: "metal",
+//     options: [],
+//     disabled: false,
+//   },
+//   {
+//     name: "metal color",
+//     options: [],
+//     disabled: false,
+//   },
+//   {
+//     name: "category",
+//     options: [],
+//     disabled: false,
+//   },
+//   {
+//     name: "size",
+//     options: [],
+//     disabled: false,
+//   },
+// ];
 
 const { products } = apiRoutes;
 
@@ -81,9 +81,55 @@ export default function Gucci() {
       return data as ProductArrival[];
     },
   });
+
   const axiosError = error as AxiosError<ErrorResponse>;
 
-  console.log(data, error);
+  const STORE_FILTERS = [
+    {
+      name: "price",
+      options: [],
+      disabled: false,
+    },
+    {
+      name: "collections",
+      options: [],
+      disabled: false,
+    },
+    {
+      name: "insert ",
+      options: [],
+      disabled: false,
+    },
+    {
+      name: "insert color",
+      options: [],
+      disabled: false,
+    },
+    {
+      name: "metal",
+      options: [],
+      disabled: false,
+    },
+    {
+      name: "metal color",
+      options: [],
+      disabled: false,
+    },
+    {
+      name: "category",
+      options: [
+        { name: `fine ${active.name}`, onPress: () => "" },
+        { name: `silver ${active.name}`, onPress: () => "" },
+        { name: `fashion ${active.name}`, onPress: () => "" },
+      ],
+      disabled: false,
+    },
+    {
+      name: "size",
+      options: [],
+      disabled: false,
+    },
+  ];
 
   const handleChange = (cat: { name: string; link: string }) => {
     setActive(cat);

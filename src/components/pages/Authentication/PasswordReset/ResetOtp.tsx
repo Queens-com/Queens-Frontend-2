@@ -2,7 +2,8 @@
 import React, { KeyboardEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "@/lib/useRouter";
 import { formatTime } from "@/lib/utils";
 import queens from "@/config/queens";
 import { apiRoutes, routes } from "@/config/routes";

@@ -16,11 +16,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { STORES } from "@/config/constants";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/useRouter";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { logoutUser } from "@/lib/utils";
 import { routes } from "@/config/routes";
+import Search from "@/components/Search";
 
 type WrapperProps = {
   children: React.ReactNode;
@@ -80,30 +81,18 @@ const Layout = ({ children }: WrapperProps) => {
 
               <div className="flex items-center gap-2">
                 <div className="w-80 mx-4">
-                  <form
-                    className="relative"
-                    onSubmit={(e) => e.preventDefault()}
-                  >
-                    <input
-                      type="text"
-                      placeholder="Search"
-                      className="w-full px-4 py-2 font-semibold text-sm rounded-3xl text-[#161616] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                    />
-                    <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
-                      <RiSearch2Line className="text-2xl" />
-                    </div>
-                  </form>
+                  <Search />
                 </div>
                 <div className="flex items-center justify-between space-x-4 text-2xl">
-                  <div>
+                  <Link href={routes.profile} className="">
                     <FaRegUserCircle />
-                  </div>
-                  <div>
+                  </Link>
+                  {/* <div>
                     <GrFavorite />
-                  </div>
-                  <div>
+                  </div> */}
+                  <Link href={routes.cart}>
                     <LuShoppingCart />
-                  </div>
+                  </Link>
                   {data ? (
                     <div
                       className="flex-shrink-0 bg-red-600 text-black px-4 py-2 rounded-full hover:bg-red-300 transition duration-300 font-semibold text-sm cursor-pointer"
@@ -132,19 +121,19 @@ const Layout = ({ children }: WrapperProps) => {
             </div>
 
             {/* Mobile Navigation */}
-            <div className="flex  items-center justify-end gap-6 text-xl w-full  lg:hidden">
-              <div>
-                <RiSearch2Line />
+            <div className="flex  items-center justify-end gap-4 text-xl w-full ml-4  lg:hidden">
+              <div className="max-w-[8rem]">
+                <Search />
               </div>
-              <div>
+              <Link href={routes.profile} className="">
                 <FaRegUserCircle />
-              </div>
-              <div>
-                <GrFavorite />
-              </div>
-              <div>
+              </Link>
+              {/* <div>
+                    <GrFavorite />
+                  </div> */}
+              <Link href={routes.cart}>
                 <LuShoppingCart />
-              </div>
+              </Link>
               <div
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-gray-700 hover:text-gray-900"
@@ -225,7 +214,7 @@ const Layout = ({ children }: WrapperProps) => {
         )} */}
       </nav>
       <div>{children}</div>
-      <footer className="md:px-14 px-4 py-6">
+      <footer className="md:px-14 px-4 py-6 mt-10">
         <div className="grid sm:grid-cols-4 grid-cols-2 gap-10 justify-between">
           <div>
             <h2 className="font-bold text-base mb-4">Company</h2>

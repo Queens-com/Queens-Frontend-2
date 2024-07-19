@@ -2,13 +2,14 @@
 import React, { KeyboardEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { formatTime } from "@/lib/utils";
 import queens from "@/config/queens";
 import { apiRoutes, routes } from "@/config/routes";
 import { AxiosRequestConfig } from "axios";
 import { IoIosArrowBack } from "react-icons/io";
 import { snackbar } from "@/components/Toaster";
+import { useRouter } from "@/lib/useRouter";
 
 const OTP: React.FC = () => {
   const router = useRouter();

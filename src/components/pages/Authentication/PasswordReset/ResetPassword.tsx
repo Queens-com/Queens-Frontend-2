@@ -2,7 +2,8 @@
 import React from "react";
 import Image from "next/image";
 import { IoIosArrowBack } from "react-icons/io";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "@/lib/useRouter";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";

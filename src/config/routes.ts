@@ -51,6 +51,8 @@ export const routes = {
   login: "/login",
   register: "/register",
   otp: "/otp",
+  profile: "/profile",
+  cart: "/cart",
   registerSuccess: "/registerSuccess",
   resetOtp: "/resetOtp",
   resetPassword: "/resetPassword",

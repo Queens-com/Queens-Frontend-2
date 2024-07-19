@@ -7,10 +7,11 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import queens from "@/config/queens";
 import { apiRoutes, routes } from "@/config/routes";
-import { useRouter, useSearchParams } from "next/navigation";
+import {  useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { snackbar } from "@/components/Toaster";
 import FormError from "../Errors/FormError";
+import { useRouter } from "@/lib/useRouter";
 
 const loginSchema: yup.ObjectSchema<FieldValues> = yup.object({
   email: yup

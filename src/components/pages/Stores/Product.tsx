@@ -1,6 +1,6 @@
 import { ProductArrival } from "@/types";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/useRouter";
 import React from "react";
 import { CiShoppingCart } from "react-icons/ci";
 
@@ -9,13 +9,14 @@ interface ProductProp {
   key: string;
   isNew?: boolean;
   link?: string;
+  handleChange?: () => void;
 }
 
 export default function Product(props: ProductProp) {
-  const { isNew = false, product, key, link } = props;
+  const { isNew = false, product, key, link, handleChange } = props;
   const router = useRouter();
   const onPress = () => {
-    console.log("yes", link);
+    if (handleChange) handleChange();
     if (link) router.push(`/stores/${link}`);
   };
   return (

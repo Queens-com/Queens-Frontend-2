@@ -16,7 +16,7 @@ interface FilterProp {
   store: string;
   store_filter?: {
     name: string;
-    options: string[];
+    options: { name: string; onPress: () => void }[];
     disabled: boolean;
   }[];
 }
@@ -46,11 +46,15 @@ export default function Filter({ cat, store, store_filter }: FilterProp) {
                       <RadioGroup>
                         {store.options.map((opt) => (
                           <div
-                            key={opt}
+                            key={opt.name}
                             className="flex items-center space-x-2 capitalize"
                           >
-                            <RadioGroupItem key={opt} value={opt} id={opt} />
-                            <p key={opt}>{opt}</p>
+                            <RadioGroupItem
+                              key={opt.name}
+                              value={opt.name}
+                              id={opt.name}
+                            />
+                            <p>{opt.name}</p>
                           </div>
                         ))}
                       </RadioGroup>

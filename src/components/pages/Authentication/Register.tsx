@@ -10,7 +10,7 @@ import FormError from "../Errors/FormError";
 import { snackbar } from "@/components/Toaster";
 import queens from "@/config/queens";
 import { apiRoutes, routes } from "@/config/routes";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/useRouter";
 import { CountryInput } from "../../Inputs/CountryInput";
 import { constants } from "@/config/constants";
 
