@@ -9,7 +9,9 @@ const Intro = () => {
   return (
     <section className="flex flex-col md:flex-row md:justify-between p-3 md:p-20  bg-backLuxury-blur bg-opacity-0">
       <div className="text-center md:text-left w-full md:w-2/5 py-8 md:py-20 px-4 md:px-10">
-        <h1 className="font-bricolage font-semibold text-3xl md:text-6xl mb-4 leading-tight md:leading-wider">
+        <h1
+          className='font-bricolage font-semibold text-3xl md:text-6xl mb-4 leading-tight md:leading-wider'
+        >
           Elegance at its peak
         </h1>
         <p className="mb-6 text-base font-normal leading-relaxed">

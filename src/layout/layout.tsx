@@ -35,7 +35,7 @@ const Layout = ({ children }: WrapperProps) => {
   const router = useRouter();
 
   return (
-    <div className="2xl:max-w-[1440px] mx-auto">
+    <div className="2xl:max-w-[1440px] mx-auto font-roboto">
       <nav className="w-full bg-white px-2 lg:px-14 md:px-10 shadow-sm ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="flex items-center justify-between h-16">

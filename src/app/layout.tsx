@@ -1,12 +1,25 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+
 import "./globals.css";
 import Providers from "@/Providers";
 import { getServerSession } from "next-auth";
 import CustomToploader from "@/components/CustomToploader";
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import { Roboto, Bricolage_Grotesque } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+export const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  display: "swap",
+  variable: '--font-bricolage',
+});
+
+export const roboto = Roboto({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["100", "300", "400", "500", "700", "900"],
+  variable: "--font-roboto",
+});
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,8 +33,8 @@ export default async function RootLayout({
 }>) {
   const session = await getServerSession(authOptions);
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={`${bricolage.variable} ${roboto.variable}`}>
+      <body>
         <CustomToploader color="#0A6CFF" showSpinner={false} />
         <Providers session={session}>{children}</Providers>
       </body>
