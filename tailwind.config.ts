@@ -50,6 +50,8 @@ const config: Config = {
       fontFamily: {
         bricolage: ["var(--font-bricolage)"],
         roboto: ["var(--font-roboto)"],
+        inter: ['var(--font-inter)'],
+        poppins: ['var(--font-poppins)'],
       },
     },
   },
