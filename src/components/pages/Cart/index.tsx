@@ -1,22 +1,9 @@
 "use client";
-import React, { useState } from "react";
-import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
-import { RiDeleteBinLine } from "react-icons/ri";
+import React from "react";
 import YourCart from "./YourCart";
 import OrderSummary from "./OrderSummary";
 
 export default function Cart() {
-  const [quantity, setQuantity] = useState(1);
-
-  const handleIncrease = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
-  };
-
-  const handleDecrease = () => {
-    if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
-    }
-  };
   return (
     <main className="p-3 lg:px-14 md:px-10">
       <header className="flex justify-between items-center mb-10">
@@ -41,7 +28,7 @@ export default function Cart() {
           </div>
         </section>
         <section className="md:w-1/2 w-full">
-          <OrderSummary />
+          <OrderSummary check={false} />
         </section>
       </div>
     </main>

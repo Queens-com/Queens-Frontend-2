@@ -22,6 +22,7 @@ import { useSession } from "next-auth/react";
 import { logoutUser } from "@/lib/utils";
 import { routes } from "@/config/routes";
 import Search from "@/components/Search";
+import { X } from "lucide-react";
 
 type WrapperProps = {
   children: React.ReactNode;
@@ -90,7 +91,7 @@ const Layout = ({ children }: WrapperProps) => {
                   {/* <div>
                     <GrFavorite />
                   </div> */}
-                  <Link href={routes.cart}>
+                  <Link href={routes.cart.index}>
                     <LuShoppingCart />
                   </Link>
                   {data ? (
@@ -131,12 +132,12 @@ const Layout = ({ children }: WrapperProps) => {
               {/* <div>
                     <GrFavorite />
                   </div> */}
-              <Link href={routes.cart}>
+              <Link href={routes.cart.index}>
                 <LuShoppingCart />
               </Link>
               <div
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-700 hover:text-gray-900"
+                className="text-gray-700 hover:text-gray-900 cursor-pointer"
               >
                 <IoMdMenu />
               </div>
@@ -154,7 +155,7 @@ const Layout = ({ children }: WrapperProps) => {
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
                   className="text-gray-700 hover:text-gray-900"
                 >
-                  <IoMdMenu className="text-xl" />
+                  <X className="text-xl cursor-pointer" />
                 </div>
               </div>
               <div className="flex flex-col gap-6 uppercase ">

@@ -45,6 +45,7 @@ export const apiRoutes = {
 
 const ROUTE_PREFIX = {
   stores: "/stores",
+  cart: "/cart",
 };
 export const routes = {
   home: "/",
@@ -52,7 +53,10 @@ export const routes = {
   register: "/register",
   otp: "/otp",
   profile: "/profile",
-  cart: "/cart",
+  cart: {
+    index: ROUTE_PREFIX.cart,
+    customer: `${ROUTE_PREFIX.cart}/customer`,
+  },
   registerSuccess: "/registerSuccess",
   resetOtp: "/resetOtp",
   resetPassword: "/resetPassword",
