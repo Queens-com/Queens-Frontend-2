@@ -16,7 +16,7 @@ export default function Profile() {
             alt="profile"
           />
           <div className="absolute top-[60%] md:top-[70%] transform -translate-x-1/2 left-1/2 ">
-            <Avatar className=" bg-black lg:w-[13rem] lg:h-[13rem] sm:w-[10rem] sm:h-[10rem] h-[7rem] w-[7rem] text-white ">
+            <Avatar className="lg:w-[13rem] lg:h-[13rem] sm:w-[10rem] sm:h-[10rem] h-[7rem] w-[7rem] text-white ">
               <AvatarImage src={""} />
               <AvatarFallback className="text-white">JA</AvatarFallback>
             </Avatar>
