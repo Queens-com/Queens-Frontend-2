@@ -59,8 +59,10 @@ export default function SinglePage() {
       <main className="p-3 lg:px-14 md:px-10 mt-2 mb-10 md:h-[30rem] h-[20rem]">
         <Errors
           message={
-            axiosError && axiosError?.response?.data?.detail
+            axiosError && typeof axiosError?.response?.data?.detail === "string"
               ? axiosError?.response?.data?.detail
+              : typeof axiosError?.response?.data?.detail === "object"
+              ? axiosError?.response?.data?.detail.err
               : "Network error"
           }
         />

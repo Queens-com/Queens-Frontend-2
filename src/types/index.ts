@@ -13,9 +13,17 @@ export enum HttpStatusCode {
   SERVICE_UNAVAILABLE = 503,
 }
 
-export interface ErrorResponse {
+type SimpleErrorDetail = {
   detail: string;
-}
+};
+
+type NestedErrorDetail = {
+  detail: {
+    err: string;
+  };
+};
+
+export type ErrorResponse = SimpleErrorDetail | NestedErrorDetail;
 
 export type Price = {
   currency: string;

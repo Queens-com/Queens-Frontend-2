@@ -144,8 +144,12 @@ export default function Search() {
                   <div className="absolute top-4 left-[0%] sm:left-[20%]  2xl:left-[30%] translate-x-1/2">
                     <Errors
                       message={
-                        axiosError && axiosError?.response?.data?.detail
+                        axiosError &&
+                        typeof axiosError?.response?.data?.detail === "string"
                           ? axiosError?.response?.data?.detail
+                          : typeof axiosError?.response?.data?.detail ===
+                            "object"
+                          ? axiosError?.response?.data?.detail.err
                           : "Network error"
                       }
                     />

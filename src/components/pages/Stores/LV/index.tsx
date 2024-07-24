@@ -142,12 +142,15 @@ export default function LV() {
             })
           ) : (
             <Errors
-          message={
-            axiosError && axiosError?.response?.data?.detail
-              ? axiosError?.response?.data?.detail
-              : "Network error"
-          }
-        />
+              message={
+                axiosError &&
+                typeof axiosError?.response?.data?.detail === "string"
+                  ? axiosError?.response?.data?.detail
+                  : typeof axiosError?.response?.data?.detail === "object"
+                  ? axiosError?.response?.data?.detail.err
+                  : "Network error"
+              }
+            />
           )}
         </section>
       </div>

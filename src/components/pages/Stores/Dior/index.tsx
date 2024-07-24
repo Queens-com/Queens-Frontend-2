@@ -142,8 +142,11 @@ export default function Dior() {
           ) : (
             <Errors
               message={
-                axiosError && axiosError?.response?.data?.detail
+                axiosError &&
+                typeof axiosError?.response?.data?.detail === "string"
                   ? axiosError?.response?.data?.detail
+                  : typeof axiosError?.response?.data?.detail === "object"
+                  ? axiosError?.response?.data?.detail.err
                   : "Network error"
               }
             />

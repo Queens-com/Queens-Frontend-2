@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import Cookies from "js-cookie";
-import { HttpStatusCode } from "@/types";
+import { ErrorResponse, HttpStatusCode } from "@/types";
 import { snackbar } from "@/components/Toaster";
 import { routes } from "@/config/routes";
 import { constants } from "../constants";
@@ -39,9 +39,7 @@ queens.interceptors.response.use(
     return response;
   },
   (error) => {
-    const x = error as AxiosError<{
-      detail: string;
-    }>;
+    const x = error as AxiosError<ErrorResponse>;
 
     if (
       x.code === CONFIG_TEXTS.aborted ||
@@ -59,7 +57,8 @@ queens.interceptors.response.use(
 
       if (status === HttpStatusCode.BAD_REQUEST && data.detail) {
         snackbar.error({
-          description: data.detail,
+          description:
+            typeof data.detail === "string" ? data.detail : data.detail.err,
           message: "Bad Request",
         });
 
@@ -99,7 +98,10 @@ queens.interceptors.response.use(
 
       if (status === HttpStatusCode.FORBIDDEN) {
         snackbar.error({
-          description: data.detail || "No permission to perform this action",
+          description:
+            typeof data.detail === "string"
+              ? data.detail
+              : data.detail.err || "No permission to perform this action",
           message: "You do not have permission to perform this action",
         });
         return Promise.reject(error);
@@ -107,7 +109,10 @@ queens.interceptors.response.use(
     }
 
     snackbar.error({
-      description: x.response?.data.detail || CONFIG_TEXTS.somethingWentWrong,
+      description:
+        typeof x.response?.data.detail === "string"
+          ? x.response?.data.detail
+          : x.response?.data.detail.err || CONFIG_TEXTS.somethingWentWrong,
       message: CONFIG_TEXTS.error,
     });
 

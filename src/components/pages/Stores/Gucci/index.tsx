@@ -189,8 +189,11 @@ export default function Gucci() {
             <div className="absolute top-4 left-[30%] translate-x-1/2">
               <Errors
                 message={
-                  axiosError && axiosError?.response?.data?.detail
+                  axiosError &&
+                  typeof axiosError?.response?.data?.detail === "string"
                     ? axiosError?.response?.data?.detail
+                    : typeof axiosError?.response?.data?.detail === "object"
+                    ? axiosError?.response?.data?.detail.err
                     : "Network error"
                 }
               />
