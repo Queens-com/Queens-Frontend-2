@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { AxiosError } from "axios";
 import { ErrorResponse, ProductArrival } from "@/types";
 import { formatUrl } from "@/lib/utils";
+import Errors from "../Errors/ProductsError";
 
 const { products } = apiRoutes;
 const NewArrivals: React.FC = () => {
@@ -59,11 +60,16 @@ const NewArrivals: React.FC = () => {
           </Link>
         </div>
         <div className="text-center text-red-400 h-[10rem]">
-          <p>
-            {axiosError && axiosError?.response?.data?.detail
-              ? axiosError?.response?.data?.detail
-              : "Network error"}
-          </p>
+          <Errors
+            message={
+              axiosError &&
+              typeof axiosError?.response?.data?.detail === "string"
+                ? axiosError?.response?.data?.detail
+                : typeof axiosError?.response?.data?.detail === "object"
+                ? axiosError?.response?.data?.detail.err
+                : "Network error"
+            }
+          />
         </div>
       </main>
     );
