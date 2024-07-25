@@ -7,6 +7,7 @@ import { Session } from "next-auth";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { constants } from "@/config/constants";
 import { snackbar } from "@/components/Toaster";
+import { User } from "@/types";
 
 const {
   API: { baseURL },
@@ -65,3 +66,10 @@ export function formatUrl(ref: string, url?: string) {
     return `${brand}/${ref}?cat=${category}`;
   }
 }
+
+export const getInitials = (user: User): string => {
+  const { first_name, last_name } = user;
+  const firstInitial = first_name.charAt(0).toUpperCase();
+  const lastInitial = last_name.charAt(0).toUpperCase();
+  return `${firstInitial}${lastInitial}`;
+};

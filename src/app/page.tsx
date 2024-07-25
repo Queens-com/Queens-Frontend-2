@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import FAQs from "@/components/pages/HomePage/FAQs";
 import FeaturesSection from "@/components/pages/HomePage/FeaturesSection";
 import Intro from "@/components/pages/HomePage/Intro";
@@ -14,7 +14,7 @@ export default function Home() {
         <div className="min-h-screen">
           <Intro />
           <FeaturesSection />
-          {/* <NewArrivals /> */}
+          <NewArrivals />
           <ShopNow />
           <FAQs />
         </div>
