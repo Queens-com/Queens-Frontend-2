@@ -52,6 +52,16 @@ export interface ProductArrival {
   category?: string;
 }
 
+export interface CartType {
+  amount: string;
+  currency: string;
+  price: string;
+  product_category: string;
+  product_name: string;
+  product_reference: string;
+  quantity: number;
+}
+
 export interface User {
   email: string;
   phone: string | null;

@@ -2,6 +2,7 @@ const serviceRoot = {
   auth: "/account",
   user: "/account",
   products: "/products",
+  cart: "/cart",
 };
 
 export const apiRoutes = {
@@ -40,6 +41,12 @@ export const apiRoutes = {
       necklaces: `${serviceRoot.products}/louis-vuitton/necklaces`,
       bracelets: `${serviceRoot.products}/louis-vuitton/bracelets`,
     },
+  },
+  cart: {
+    add: `${serviceRoot.cart}/add_product`,
+    get: `${serviceRoot.cart}/cart_content`,
+    clear: `${serviceRoot.cart}/clear_cart`,
+    update: `${serviceRoot.cart}/update_product_quantity`,
   },
 };
 

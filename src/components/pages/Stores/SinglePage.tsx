@@ -7,6 +7,8 @@ import { routes } from "@/config/routes";
 import Product from "./Product";
 import { ProductType } from "@/types";
 import NewArrivals from "./NewArrivals";
+import { addCart } from "@/config/cart";
+import { snackbar } from "@/components/Toaster";
 
 interface SinglePageProp {
   product: ProductType;
@@ -14,6 +16,7 @@ interface SinglePageProp {
 
 export default function SinglePages({ product }: SinglePageProp) {
   const [quantity, setQuantity] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   const handleIncrease = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
@@ -22,6 +25,22 @@ export default function SinglePages({ product }: SinglePageProp) {
   const handleDecrease = () => {
     if (quantity > 1) {
       setQuantity((prevQuantity) => prevQuantity - 1);
+    }
+  };
+
+  const addToCart = async () => {
+    setLoading(true);
+    try {
+      if (product) {
+        addCart(product?.reference, product?.category, quantity);
+      }
+    } catch (err) {
+      snackbar.error({
+        description: "An error occurred while adding cart",
+        message: "Cart Error",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,8 +90,11 @@ export default function SinglePages({ product }: SinglePageProp) {
               <button className="text-sm w-full p-2 bg-black text-white rounded-2xl">
                 Buy Now
               </button>
-              <button className="text-sm w-full p-2 border rounded-2xl border-black">
-                Add to cart
+              <button
+                onClick={() => addToCart()}
+                className="text-sm w-full p-2 border rounded-2xl border-black"
+              >
+                {loading ? "Adding..." : "Add to cart"}
               </button>
             </div>
           </article>

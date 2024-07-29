@@ -10,7 +10,7 @@ import { apiRoutes, routes } from "@/config/routes";
 import { useRouter } from "@/lib/useRouter";
 import { CountryInput } from "../../Inputs/CountryInput";
 import { constants } from "@/config/constants";
-import { useSession } from "next-auth/react";
+import { getSession, signIn, useSession } from "next-auth/react";
 import UserLogin from "./UserLogin";
 
 const profileSchema: yup.ObjectSchema<FieldValues> = yup.object({
@@ -28,6 +28,7 @@ const profileSchema: yup.ObjectSchema<FieldValues> = yup.object({
 
 export default function SingleProfile() {
   const { data } = useSession();
+  const { user } = apiRoutes;
 
   const { COUNTRY_LIST } = constants;
   const {
@@ -40,7 +41,37 @@ export default function SingleProfile() {
     resolver: yupResolver(profileSchema),
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = async (payload) => {};
+  const onSubmit: SubmitHandler<FieldValues> = async (payload) => {
+    try {
+      const body = {
+        email: payload.email,
+        password: payload.password,
+        phone: data?.user?.phone,
+        country_code: data?.user?.country_code,
+        first_name: payload.firstName,
+        last_name: payload.lastName,
+        middle_name: data?.user?.middle_name,
+        profile_photo: data?.user?.profile_photo,
+        country: payload.country,
+      };
+      console.log(body);
+
+      await queens.post(user.profile, body);
+      const session = await getSession();
+      await signIn("update-jwt", {
+        accessToken: session?.accessToken,
+        callbackUrl: routes.profile,
+        redirect: false,
+      });
+      snackbar({
+        description: "Profile has been updated!",
+        message: "Saved",
+      });
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
 
   useEffect(() => {
     reset({

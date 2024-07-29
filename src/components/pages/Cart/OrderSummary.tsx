@@ -3,8 +3,15 @@ import React from "react";
 import OrderCart from "./OrderCart";
 import Link from "next/link";
 import { routes } from "@/config/routes";
+import { CartType } from "@/types";
+import { calculateTotal } from "@/lib/utils";
 
-export default function OrderSummary({ check }: { check: boolean }) {
+interface OrderProp {
+  check: boolean;
+  cart: CartType[];
+}
+
+export default function OrderSummary({ check, cart }: OrderProp) {
   return (
     <main className="p-2 border text-sm">
       <section className=" py-3 space-y-4">
@@ -13,10 +20,10 @@ export default function OrderSummary({ check }: { check: boolean }) {
           <X size={15} />
         </header>
         <div>
-          {[1, 2].map((_, i) => {
+          {cart?.map((cart, i) => {
             return (
               <div key={i}>
-                <OrderCart />
+                <OrderCart cart={cart} />
               </div>
             );
           })}
@@ -35,7 +42,7 @@ export default function OrderSummary({ check }: { check: boolean }) {
       <section className="space-y-2 border-t py-2">
         <div className="flex justify-between items-center gap-4">
           <p>Subtotal</p>
-          <p>$101.97</p>
+          <p>${calculateTotal(cart)}</p>
         </div>
         <div className="flex justify-between items-center gap-4">
           <p>Shipping</p>
@@ -51,7 +58,7 @@ export default function OrderSummary({ check }: { check: boolean }) {
         </div>
         <div className="flex justify-between items-center gap-4 border-t pt-3 mt-3">
           <p>Total</p>
-          <p>$101.97</p>
+          <p>${calculateTotal(cart)}</p>
         </div>
         <div className={`${check && "hidden"}  pt-4 w-full`}>
           <button className="text-white bg-black rounded-xl w-full p-1">

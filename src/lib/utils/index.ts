@@ -7,7 +7,7 @@ import { Session } from "next-auth";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { constants } from "@/config/constants";
 import { snackbar } from "@/components/Toaster";
-import { User } from "@/types";
+import { CartType, User } from "@/types";
 
 const {
   API: { baseURL },
@@ -73,3 +73,11 @@ export const getInitials = (user: User): string => {
   const lastInitial = last_name.charAt(0).toUpperCase();
   return `${firstInitial}${lastInitial}`;
 };
+
+export function calculateTotal(products: CartType[]): number {
+  return products.reduce((total, product) => {
+    const price = parseFloat(product.price.replace(/,/g, ""));
+    console.log(product.quantity, price);
+    return total + product.quantity * price;
+  }, 0);
+}
