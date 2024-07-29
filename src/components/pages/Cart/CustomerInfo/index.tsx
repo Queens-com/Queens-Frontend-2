@@ -2,12 +2,25 @@
 import React, { useState } from "react";
 import OrderSummary from "../OrderSummary";
 import Link from "next/link";
-import { routes } from "@/config/routes";
 import ContactForm from "./ContactForm";
 import AddressForm from "./Address";
 import PaymentForm from "./PaymentForm";
+import { useQuery } from "@tanstack/react-query";
+import queens from "@/config/queens";
+import { apiRoutes, routes } from "@/config/routes";
+import { CartType } from "@/types";
+import EmptyCart from "../EmptyCart";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CustomerInfo() {
+  const { cart } = apiRoutes;
+  const { data, error, isError, isFetching, isLoading, refetch } = useQuery({
+    queryKey: ["carts"],
+    queryFn: async () => {
+      const { data } = await queens.get(cart.get);
+      return data.cart_content as CartType[];
+    },
+  });
   const [info, setInfo] = useState({
     contact: true,
     address: false,
@@ -25,16 +38,20 @@ export default function CustomerInfo() {
         </div>
         <p className="text-sm text-gray-600">2 items</p>
       </header>
-      <div className="flex md:flex-row flex-col gap-8">
-        <section className="md:w-1/2 w-full space-y-4">
-          <ContactForm contact={info.contact} setInfo={setInfo} />
-          <AddressForm address={info.address} setInfo={setInfo} />
-          <PaymentForm payment={info.payment} setInfo={setInfo} />
-        </section>
-        <section className="md:w-1/2 w-full">
-          <OrderSummary check={true} />
-        </section>
-      </div>
+      {data && data.length ? (
+        <div className="flex md:flex-row flex-col gap-8">
+          <section className="md:w-1/2 w-full space-y-4">
+            <ContactForm contact={info.contact} setInfo={setInfo} />
+            <AddressForm address={info.address} setInfo={setInfo} />
+            <PaymentForm payment={info.payment} setInfo={setInfo} />
+          </section>
+          <section className="md:w-1/2 w-full">
+            <OrderSummary cart={data} check={true} />
+          </section>
+        </div>
+      ) : (
+        <EmptyCart />
+      )}
     </main>
   );
 }
