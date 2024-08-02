@@ -5,6 +5,8 @@ import Link from "next/link";
 import { routes } from "@/config/routes";
 import { CartType } from "@/types";
 import { calculateTotal } from "@/lib/utils";
+import { useDeleteCart } from "@/config/cart/useCart";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface OrderProp {
   check: boolean;
@@ -12,12 +14,37 @@ interface OrderProp {
 }
 
 export default function OrderSummary({ check, cart }: OrderProp) {
+  const queryClient = useQueryClient();
+
+  const {
+    mutate: deleteCart,
+    isPending,
+    error,
+    data,
+  } = useMutation({
+    mutationFn: async () => {
+      return await useDeleteCart();
+    },
+    onError: (err) => {
+      return err;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["carts"] });
+      queryClient.refetchQueries({ queryKey: ["carts"] });
+    },
+  });
+  // const deleteCart = () => {
+  //   useDeleteCart();
+  //   queryClient.invalidateQueries({ queryKey: ["carts"] });
+  // };
   return (
     <main className="p-2 border text-sm">
       <section className=" py-3 space-y-4">
         <header className="flex justify-between items-center">
           <p className="text-xl font-bold">Order Summary</p>
-          <X size={15} />
+          <button onClick={() => deleteCart()}>
+            <X size={15} />
+          </button>
         </header>
         <div>
           {cart?.map((cart, i) => {

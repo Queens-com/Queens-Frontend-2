@@ -23,6 +23,7 @@ import { logoutUser } from "@/lib/utils";
 import { routes } from "@/config/routes";
 import Search from "@/components/Search";
 import { X } from "lucide-react";
+import { useGetCart } from "../config/cart/useCart";
 
 type WrapperProps = {
   children: React.ReactNode;
@@ -30,6 +31,7 @@ type WrapperProps = {
 
 const Layout = ({ children }: WrapperProps) => {
   const { data } = useSession();
+  const { data: cart } = useGetCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [arrow, setArrow] = useState(false);
   const router = useRouter();
@@ -91,8 +93,11 @@ const Layout = ({ children }: WrapperProps) => {
                   {/* <div>
                     <GrFavorite />
                   </div> */}
-                  <Link href={routes.cart.index}>
+                  <Link href={routes.cart.index} className="relative">
                     <LuShoppingCart />
+                    <div className="rounded-full bg-red-500 w-4 text-center flex items-center justify-center h-4 absolute text-[0.5rem] text-white -right-2 -top-1">
+                      <p>{cart ? cart?.length : 0}</p>
+                    </div>
                   </Link>
                   {data ? (
                     <div
@@ -132,8 +137,11 @@ const Layout = ({ children }: WrapperProps) => {
               {/* <div>
                     <GrFavorite />
                   </div> */}
-              <Link href={routes.cart.index}>
+              <Link href={routes.cart.index} className="relative">
                 <LuShoppingCart />
+                <div className="rounded-full bg-red-500 w-4 text-center flex items-center justify-center h-4 absolute text-[0.5rem] text-white -right-2 -top-1">
+                  <p>{cart ? cart?.length : 0}</p>
+                </div>
               </Link>
               <div
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -147,7 +155,7 @@ const Layout = ({ children }: WrapperProps) => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden absolute left-0 top-0 z-30 flex flex-col pt-2 px-5 bg-white w-[100vw] min-h-[100vh] pb-2">
+          <div className="lg:hidden absolute left-0 top-0 z-40 flex flex-col pt-2 px-5 bg-white w-[100vw] min-h-[100vh] pb-2">
             <div className="px-2 mt-6 pb-3 space-y-1 sm:px-3">
               <div className="flex justify-between mb-6 items-center">
                 <p className="bricolage font-bold text-black text-3xl">Menu</p>

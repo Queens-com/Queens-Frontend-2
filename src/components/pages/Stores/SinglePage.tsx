@@ -7,14 +7,16 @@ import { routes } from "@/config/routes";
 import Product from "./Product";
 import { ProductType } from "@/types";
 import NewArrivals from "./NewArrivals";
-import { addCart } from "@/config/cart";
+import { useAddCart } from "@/config/cart/useCart";
 import { snackbar } from "@/components/Toaster";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface SinglePageProp {
   product: ProductType;
 }
 
 export default function SinglePages({ product }: SinglePageProp) {
+  const queryClient = useQueryClient();
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(false);
 
@@ -28,21 +30,25 @@ export default function SinglePages({ product }: SinglePageProp) {
     }
   };
 
-  const addToCart = async () => {
-    setLoading(true);
-    try {
-      if (product) {
-        addCart(product?.reference, product?.category, quantity);
-      }
-    } catch (err) {
+  const {
+    mutate: addToCart,
+    isPending,
+    error,
+  } = useMutation({
+    mutationFn: async () => {
+      return await useAddCart(product?.reference, product?.category, quantity);
+    },
+    onError: (err) => {
       snackbar.error({
         description: "An error occurred while adding cart",
         message: "Cart Error",
       });
-    } finally {
-      setLoading(false);
-    }
-  };
+      return err;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["carts"] });
+    },
+  });
 
   return (
     <main className="">
@@ -94,7 +100,7 @@ export default function SinglePages({ product }: SinglePageProp) {
                 onClick={() => addToCart()}
                 className="text-sm w-full p-2 border rounded-2xl border-black"
               >
-                {loading ? "Adding..." : "Add to cart"}
+                {isPending ? "Adding..." : "Add to cart"}
               </button>
             </div>
           </article>

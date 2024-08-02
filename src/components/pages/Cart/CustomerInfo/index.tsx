@@ -11,16 +11,11 @@ import { apiRoutes, routes } from "@/config/routes";
 import { CartType } from "@/types";
 import EmptyCart from "../EmptyCart";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useGetCart } from "@/config/cart/useCart";
 
 export default function CustomerInfo() {
   const { cart } = apiRoutes;
-  const { data, error, isError, isFetching, isLoading, refetch } = useQuery({
-    queryKey: ["carts"],
-    queryFn: async () => {
-      const { data } = await queens.get(cart.get);
-      return data.cart_content as CartType[];
-    },
-  });
+  const { data, error, isError, isFetching, isLoading, refetch } = useGetCart();
   const [info, setInfo] = useState({
     contact: true,
     address: false,

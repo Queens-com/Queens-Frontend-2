@@ -3647,12 +3647,29 @@ const STORE_FILTERS = [
 
 const FAQ = [
   {
-    question: "How do I make order?",
-    answer: "click on shop now and choose the store you want to purchase from",
+    question: "How can you offer such competitive prices?",
+    answer:
+      "We keep our prices low by operating primarily online, cutting out middlemen, and maintaining efficient operations. This allows us to pass the savings directly to our customers without compromising on quality.",
   },
   {
-    question: "How do I make order now?",
-    answer: "click on shop now and choose the store you want to purchase from",
+    question: "Is your jewelry real and authentic?",
+    answer:
+      "Absolutely! All our jewelry is 100% authentic and made with real materials as described. We provide certificates of authenticity for all precious stores and metals. We stand behind the quality of our products with our money-back guarantee.",
+  },
+  {
+    question: "What if the jewelry doesn't meet my expectations?",
+    answer:
+      "We offer a 30-day return policy for any reason. If you're not completely satisfied, you can return the item for a full refund or exchange. We also provide free return shipping to ensure your complete satisfaction.",
+  },
+  {
+    question: "How do i know i'm getting the right size?",
+    answer:
+      "We provide detailed sizing guides for all our jewelry. For rings, we offer a free ring sizer tool that we can mail to you. If you receive an item that doesn't fit, we offer free exchanges to get you the perfect size.",
+  },
+  {
+    question: "Do you offer warranty on your jewelry?",
+    answer:
+      "Yes, we provide a one-year warranty on all our jewelry against manufacturing defects. Additionally, we offer affordable extended care plans for long-term protection and maintenance of your precious pieces.",
   },
 ];
 
