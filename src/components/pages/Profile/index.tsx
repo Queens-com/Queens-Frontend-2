@@ -11,10 +11,16 @@ import Orders from "./Orders";
 import WhiteList from "./WhiteList";
 import { useSession } from "next-auth/react";
 import { getInitials } from "@/lib/utils";
+import UploadAvatar from "@/components/UploadAvatar";
 
 export default function Profile() {
   const { data } = useSession();
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [label, setLabel] = useState("personal");
+  const handleProfileClick = () => {
+    if (!uploading) document.getElementById("profileUpload")?.click();
+  };
   const tabItems = [
     {
       component: <SingleProfile />,
@@ -46,18 +52,31 @@ export default function Profile() {
             className="w-full lg:h-[20rem] sm:h-[15rem] h-[10rem] object-cover "
             alt="profile"
           />
-          <div className="absolute top-[60%] md:top-[70%] z-30 transform -translate-x-1/2 left-1/2 border rounded-full border-black">
-            <Avatar className="lg:w-[13rem] lg:h-[13rem] sm:w-[10rem] sm:h-[10rem] h-[7rem] w-[7rem] bg-white border-black">
-              <AvatarImage src={""} />
+          <div className="absolute top-[60%] md:top-[70%] z-30 transform -translate-x-1/2 left-1/2 border-[1px] rounded-full border-gray-400 bg-gray-600">
+            <Avatar
+              className={`lg:w-[13rem] lg:h-[13rem] sm:w-[10rem] sm:h-[10rem] h-[7rem] w-[7rem] bg-white border-black  ${
+                uploading && "brightness-0 animate-pulse"
+              }`}
+            >
+              <AvatarImage src={data?.user?.profile_photo ?? undefined} />
               <AvatarFallback className="text-black flex items-center justify-center text-center w-full h-full md:text-6xl text-4xl">
                 {data?.user ? getInitials(data.user) : "AA"}
               </AvatarFallback>
             </Avatar>
-            <div className="absolute lg:bottom-10 lg:right-2 right-0 bottom-5 sm:right-3 bg-white">
+            <div
+              className="absolute lg:bottom-10 lg:right-2 right-0 bottom-5 sm:right-3 bg-white cursor-pointer rounded-full p-[2px] pl-[3px] pb-[3px] mx-auto"
+              onClick={handleProfileClick}
+            >
               <CiCamera />
             </div>
           </div>
         </div>
+        <UploadAvatar
+          setUploading={setUploading}
+          uploading={uploading}
+          setProgress={setProgress}
+          progress={progress}
+        />
         <p className="capitalize font-bold md:text-3xl sm:text-2xl text-xl lg:mt-32 sm:mt-28 mt-16">
           {data?.user?.first_name} {data?.user?.last_name}
         </p>

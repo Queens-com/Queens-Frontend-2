@@ -31,11 +31,12 @@ type WrapperProps = {
 
 const Layout = ({ children }: WrapperProps) => {
   const { data } = useSession();
-  const { data: cart } = useGetCart();
+  const { data: cart, error, isError } = useGetCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [arrow, setArrow] = useState(false);
   const router = useRouter();
 
+  console.log(cart, error, isError);
   return (
     <div className="2xl:max-w-[1440px] mx-auto font-roboto">
       <nav className="w-full bg-white px-2 lg:px-14 md:px-10 shadow-sm ">
@@ -96,7 +97,7 @@ const Layout = ({ children }: WrapperProps) => {
                   <Link href={routes.cart.index} className="relative">
                     <LuShoppingCart />
                     <div className="rounded-full bg-red-500 w-4 text-center flex items-center justify-center h-4 absolute text-[0.5rem] text-white -right-2 -top-1">
-                      <p>{cart ? cart?.length : 0}</p>
+                      <p>{cart && !error ? cart.length : 0}</p>
                     </div>
                   </Link>
                   {data ? (
@@ -140,7 +141,7 @@ const Layout = ({ children }: WrapperProps) => {
               <Link href={routes.cart.index} className="relative">
                 <LuShoppingCart />
                 <div className="rounded-full bg-red-500 w-4 text-center flex items-center justify-center h-4 absolute text-[0.5rem] text-white -right-2 -top-1">
-                  <p>{cart ? cart?.length : 0}</p>
+                  <p>{cart && !error ? cart.length : 0}</p>
                 </div>
               </Link>
               <div

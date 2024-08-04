@@ -48,6 +48,7 @@ export const apiRoutes = {
     clear: `${serviceRoot.cart}/clear_cart`,
     update: `${serviceRoot.cart}/update_product_quantity`,
   },
+  upload: "/upload-profile-photo",
 };
 
 const ROUTE_PREFIX = {

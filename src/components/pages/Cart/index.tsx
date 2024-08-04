@@ -20,21 +20,38 @@ export default function Cart() {
   });
 
   console.log(data, error);
-  if (isFetching || isLoading) {
+  // if (isFetching || isLoading) {
+  //   return (
+  //     <main className="p-3 lg:px-14 md:px-10 mt-2 mb-10 w-full">
+  //       <div className="h-screen w-full flex md:flex-row flex-col items-start gap-3 ">
+  //         <div className=" w-full p-2 border md:w-1/2 space-y-2">
+  //           <Skeleton className="w-full   h-[10rem]" />
+  //           <Skeleton className="w-full   h-[10rem]" />
+  //           <Skeleton className="w-full   h-[10rem]" />
+  //         </div>
+  //         <div className=" w-full p-2 border md:w-1/2 space-y-2">
+  //           <Skeleton className="w-full   h-[10rem]" />
+  //           <Skeleton className="w-full   h-[10rem]" />
+  //           <Skeleton className="w-full   h-[10rem]" />
+  //         </div>
+  //       </div>
+  //     </main>
+  //   );
+  // }
+
+  if (error || isError) {
     return (
-      <main className="p-3 lg:px-14 md:px-10 mt-2 mb-10 w-full">
-        <div className="h-screen w-full flex md:flex-row flex-col items-start gap-3 ">
-          <div className=" w-full p-2 border md:w-1/2 space-y-2">
-            <Skeleton className="w-full   h-[10rem]" />
-            <Skeleton className="w-full   h-[10rem]" />
-            <Skeleton className="w-full   h-[10rem]" />
+      <main className="p-3 lg:px-14 md:px-10">
+        <header className="flex justify-between items-center mb-10">
+          <div>
+            <p className="font-bold md:text-3xl text-xl">Your Cart</p>
+            <p className="md:text-sm text-xs text-gray-600">
+              Your Cart / Contact Information
+            </p>
           </div>
-          <div className=" w-full p-2 border md:w-1/2 space-y-2">
-            <Skeleton className="w-full   h-[10rem]" />
-            <Skeleton className="w-full   h-[10rem]" />
-            <Skeleton className="w-full   h-[10rem]" />
-          </div>
-        </div>
+          <p className="text-sm text-gray-600">{data?.length ?? 0} items</p>
+        </header>
+        <EmptyCart />;
       </main>
     );
   }

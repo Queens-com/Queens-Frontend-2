@@ -3,7 +3,7 @@ import NewArrivals from "../Stores/NewArrivals";
 
 export default function EmptyCart() {
   return (
-    <main>
+    <main className="mt-10">
       <header className="text-center">
         <p className="text-xl font-bold">No items yet!</p>
         <p className="text-sm text-gray-400">

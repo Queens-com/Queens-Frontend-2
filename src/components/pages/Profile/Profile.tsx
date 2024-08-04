@@ -45,13 +45,12 @@ export default function SingleProfile() {
     try {
       const body = {
         email: payload.email,
-        password: payload.password,
-        phone: data?.user?.phone,
-        country_code: data?.user?.country_code,
+        phone: data?.user?.phone ?? "",
+        country_code: data?.user?.country_code ?? "",
         first_name: payload.firstName,
         last_name: payload.lastName,
         middle_name: data?.user?.middle_name,
-        profile_photo: data?.user?.profile_photo,
+        profile_photo: data?.user?.profile_photo ?? "",
         country: payload.country,
       };
       console.log(body);

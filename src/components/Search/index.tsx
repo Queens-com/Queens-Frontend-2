@@ -141,7 +141,7 @@ export default function Search() {
                     );
                   })
                 ) : error ? (
-                  <div className="absolute top-4 left-[0%] sm:left-[20%]  2xl:left-[30%] translate-x-1/2">
+                  <div className="absolute transform -translate-x-1/2 left-1/2">
                     <Errors
                       message={
                         axiosError &&
@@ -155,7 +155,7 @@ export default function Search() {
                     />
                   </div>
                 ) : (
-                  <div className="absolute top-4 left-[0%] hidden md:block sm:left-[20%]  2xl:left-[30%] translate-x-1/2">
+                  <div className=" absolute transform -translate-x-1/2 left-1/2">
                     <p className="text-center mx-auto mt-10 font-bold w-full">
                       Search for anything
                     </p>

@@ -53,3 +53,32 @@ export const useDeleteCart = async () => {
     return error;
   }
 };
+
+export const useUpdateCart = async (ref: string, quantity: number) => {
+  try {
+    const body = {
+      product_reference: ref,
+      quantity: quantity,
+    };
+    await queens.patch(cart.update, body);
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+export const useDeleteItem = async (ref: string) => {
+  try {
+    const body = {
+      product_reference: ref,
+      quantity: 0,
+    };
+    await queens.patch(cart.update, body);
+    snackbar({
+      description: "Item has been removed from cart",
+      message: "Item Removed",
+    });
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};

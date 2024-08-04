@@ -1,3 +1,5 @@
+import { AxiosResponse } from "axios";
+
 export enum HttpStatusCode {
   OK = 200,
   CREATED = 201,
@@ -24,6 +26,7 @@ type NestedErrorDetail = {
 };
 
 export type ErrorResponse = SimpleErrorDetail | NestedErrorDetail;
+
 
 export type Price = {
   currency: string;
@@ -60,6 +63,10 @@ export interface CartType {
   product_name: string;
   product_reference: string;
   quantity: number;
+  image: string;
+}
+export interface GeneratedUrl {
+  url?: string;
 }
 
 export interface User {

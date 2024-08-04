@@ -5,7 +5,7 @@ import Link from "next/link";
 import { routes } from "@/config/routes";
 import { CartType } from "@/types";
 import { calculateTotal } from "@/lib/utils";
-import { useDeleteCart } from "@/config/cart/useCart";
+import { useDeleteCart, useGetCart } from "@/config/cart/useCart";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface OrderProp {
@@ -15,12 +15,12 @@ interface OrderProp {
 
 export default function OrderSummary({ check, cart }: OrderProp) {
   const queryClient = useQueryClient();
+  // const { refetch } = useGetCart();
 
   const {
     mutate: deleteCart,
     isPending,
     error,
-    data,
   } = useMutation({
     mutationFn: async () => {
       return await useDeleteCart();
@@ -30,7 +30,6 @@ export default function OrderSummary({ check, cart }: OrderProp) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["carts"] });
-      queryClient.refetchQueries({ queryKey: ["carts"] });
     },
   });
   // const deleteCart = () => {

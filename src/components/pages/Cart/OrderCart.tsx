@@ -1,5 +1,6 @@
 "use client";
 import { CartType } from "@/types";
+import Image from "next/image";
 import React, { useState } from "react";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -22,7 +23,15 @@ export default function OrderCart({ cart }: OrderProp) {
 
   return (
     <div className="flex gap-2 justify-between sm:items-center items-start p-2 border text-sm">
-      <div className="max-w-[6rem] w-full border h-[6rem]"></div>
+      <div className="max-w-[6rem] w-full border h-[6rem]">
+        <Image
+          src={cart.image}
+          alt="item"
+          width={400}
+          height={400}
+          className="shrink w-full h-full object-cover border hover:brightness-90"
+        />
+      </div>
       <div className="flex flex-col  justify-between h-[4rem] w-3/5">
         <p className=" text-gray-500 text-xs">{cart.product_reference}</p>
         <p className="uppercase">{cart.product_name}</p>
