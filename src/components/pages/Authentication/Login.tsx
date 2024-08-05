@@ -48,7 +48,7 @@ function Login() {
       await signIn("update-jwt", {
         accessToken: data?.token,
         callbackUrl: callbackUrl || routes.home,
-        expiresIn: 60,
+        expiresIn: 39600,
         redirect: false,
       });
 
