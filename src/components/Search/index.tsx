@@ -50,7 +50,6 @@ export default function Search() {
         search: search,
       };
       const { data } = await queens.post(products.search, body);
-      console.log(data.data);
       return data.data as ProductArrival[];
     },
     onError: (err) => {

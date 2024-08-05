@@ -77,7 +77,7 @@ export const getInitials = (user: User): string => {
 export function calculateTotal(products: CartType[]): number {
   return products.reduce((total, product) => {
     const price = parseFloat(product.price.replace(/,/g, ""));
-    console.log(product.quantity, price);
+    product.quantity, price;
     return total + product.quantity * price;
   }, 0);
 }

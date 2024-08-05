@@ -110,14 +110,12 @@ const OTP: React.FC = () => {
         user_id: data?.data?.user_id || "",
         otp: otpValues.join(""),
       };
-      console.log(payload);
       return await queens.post(auth.verifyOtp, payload);
     },
     onError: (err) => {
       return err;
     },
     onSuccess: async (data) => {
-      console.log(data?.data?.token);
       try {
         const accessToken = data?.data?.token;
         // const accessToken = "";

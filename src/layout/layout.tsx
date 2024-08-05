@@ -23,7 +23,7 @@ import { logoutUser } from "@/lib/utils";
 import { routes } from "@/config/routes";
 import Search from "@/components/Search";
 import { X } from "lucide-react";
-import { useGetCart } from "../config/cart/useCart";
+import { useGetCart } from "@/config/cart/useGetCart";
 
 type WrapperProps = {
   children: React.ReactNode;
@@ -36,7 +36,6 @@ const Layout = ({ children }: WrapperProps) => {
   const [arrow, setArrow] = useState(false);
   const router = useRouter();
 
-  console.log(cart, error, isError);
   return (
     <div className="2xl:max-w-[1440px] mx-auto font-roboto">
       <nav className="w-full bg-white px-2 lg:px-14 md:px-10 shadow-sm ">

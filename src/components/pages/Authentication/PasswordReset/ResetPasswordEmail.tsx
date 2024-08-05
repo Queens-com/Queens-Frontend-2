@@ -36,10 +36,8 @@ const ResetPasswordEmail = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (payload) => {
     try {
-      console.log(payload);
       router.push(`${routes.resetOtp}?email=${payload.email}`);
     } catch (error) {
-      console.log(error);
       return error;
     }
   };

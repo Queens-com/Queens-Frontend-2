@@ -53,12 +53,12 @@ export default function SingleProfile() {
         profile_photo: data?.user?.profile_photo ?? "",
         country: payload.country,
       };
-      console.log(body);
 
       await queens.post(user.profile, body);
       const session = await getSession();
       await signIn("update-jwt", {
         accessToken: session?.accessToken,
+        expiresIn: session?.expiresIn,
         callbackUrl: routes.profile,
         redirect: false,
       });
@@ -67,7 +67,6 @@ export default function SingleProfile() {
         message: "Saved",
       });
     } catch (error) {
-      console.log(error);
       return error;
     }
   };

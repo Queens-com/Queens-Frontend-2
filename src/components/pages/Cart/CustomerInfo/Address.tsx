@@ -53,9 +53,7 @@ export default function AddressForm({ address, setInfo }: ContactProp) {
     resolver: yupResolver(contactSchema),
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = async (payload) => {
-    console.log(payload);
-  };
+  const onSubmit: SubmitHandler<FieldValues> = async (payload) => {};
   const handleClick = (status: boolean) => {
     setInfo({ contact: false, address: status, payment: false });
   };

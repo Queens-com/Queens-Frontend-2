@@ -25,7 +25,6 @@ export const useAddCart = async (
       message: "Added to cart",
     });
   } catch (error) {
-    console.log(error);
     return error;
   }
 };
@@ -49,7 +48,7 @@ export const useDeleteCart = async () => {
       message: "Cart Cleared",
     });
   } catch (error) {
-    console.log(error);
+    error;
     return error;
   }
 };
@@ -62,7 +61,6 @@ export const useUpdateCart = async (ref: string, quantity: number) => {
     };
     await queens.patch(cart.update, body);
   } catch (error) {
-    console.log(error);
     return error;
   }
 };
@@ -78,7 +76,6 @@ export const useDeleteItem = async (ref: string) => {
       message: "Item Removed",
     });
   } catch (error) {
-    console.log(error);
     return error;
   }
 };

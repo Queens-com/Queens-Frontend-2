@@ -54,7 +54,7 @@ export default function PaymentForm({ payment, setInfo }: ContactProp) {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (payload) => {
-    console.log(payload);
+    // console.log(payload);
   };
   const handleClick = (status: boolean) => {
     setInfo({ contact: false, address: false, payment: status });

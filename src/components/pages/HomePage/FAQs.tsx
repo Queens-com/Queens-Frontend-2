@@ -19,7 +19,7 @@ const FAQs = () => {
           {FAQ.map((f, i) => {
             return (
               <AccordionItem value={f.question} key={f.question}>
-                <AccordionTrigger className="capitalize font-semibold">
+                <AccordionTrigger className="capitalize font-semibold text-left">
                   {f.question}
                 </AccordionTrigger>
                 <AccordionContent className="space-y-3">

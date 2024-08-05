@@ -27,8 +27,6 @@ export default function SinglePage() {
     },
   });
 
-  console.log(data, error);
-
   if (isLoading || isFetching) {
     return (
       <main className="p-3 lg:px-14 md:px-10 mt-2 mb-10 w-full">

@@ -38,7 +38,7 @@ export default function ContactForm({ contact, setInfo }: ContactProp) {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (payload) => {
-    console.log(payload);
+    // console.log(payload);
   };
   const handleClick = (status: boolean) => {
     setInfo({ contact: status, address: false, payment: false });

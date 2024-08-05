@@ -38,7 +38,6 @@ export default function UploadAvatar({
       try {
         const formData = new FormData();
         formData.append("file", fileState);
-        console.log(formData);
         const res = await queens.post(upload, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -65,6 +64,7 @@ export default function UploadAvatar({
         const session = await getSession();
         await signIn("update-jwt", {
           accessToken: session?.accessToken,
+          expiresIn: session?.expiresIn,
           callbackUrl: routes.profile,
           redirect: false,
         });
@@ -74,7 +74,6 @@ export default function UploadAvatar({
           message: "Profile Image Uploaded",
         });
       } catch (err) {
-        console.log(err);
         snackbar.error({
           description: "Failed to upload profile picture.",
           message: "Upload Error",

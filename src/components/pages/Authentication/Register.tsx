@@ -64,7 +64,6 @@ function Register() {
         profile_photo: "",
         country: payload.country,
       };
-      console.log(body);
 
       await queens.post(auth.signup, body);
       snackbar({
@@ -74,7 +73,6 @@ function Register() {
       });
       router.push(`${routes.otp}?email=${payload.email}`);
     } catch (error) {
-      console.log(error);
       return error;
     }
   };
@@ -110,13 +108,20 @@ function Register() {
                 height={200}
                 src={"/google.png"}
                 alt="google"
+                className="w-max"
               />
               <h1 className="text-gray-700 text-xs md:text-base pr-5">
                 Google
               </h1>
             </div>
             <div className="flex gap-2 items-center py-2 px-4 border border-gray-400 rounded-full">
-              <Image width={200} height={200} src={"/apple.png"} alt="apple" />
+              <Image
+                width={200}
+                height={200}
+                src={"/apple.png"}
+                alt="apple"
+                className="w-max"
+              />
               <h1 className="text-gray-700 text-xs md:text-base pr-4">Apple</h1>
             </div>
             <div className="flex gap-2 items-center py-2 px-2 border border-gray-400 rounded-full">
@@ -257,7 +262,11 @@ function Register() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className=" hover:bg-[#1E1E1E] text-[#1E1E1E] bg-[#F5F5F5] hover:text-white pt-2 pb-2 ps-4 pe-4 placeholder:font-normal placeholder:text-sm rounded-full"
+              className={` pt-2 pb-2 ps-4 pe-4 placeholder:font-normal placeholder:text-sm rounded-full ${
+                Object.keys(errors).length < 1
+                  ? "bg-[#1E1E1E] text-white"
+                  : "text-[#1E1E1E] bg-[#F5F5F5]"
+              }`}
             >
               {isSubmitting ? "Signing up..." : "Sign up"}
             </button>

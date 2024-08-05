@@ -84,8 +84,6 @@ export default function LV() {
   });
   const axiosError = error as AxiosError<ErrorResponse>;
 
-  console.log(data, error);
-
   const handleChange = (cat: { name: string; link: string }) => {
     setActive(cat);
   };

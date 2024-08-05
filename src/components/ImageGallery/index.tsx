@@ -7,7 +7,6 @@ interface ImageGalleryProp {
 }
 
 export const ImageGallery = ({ images }: ImageGalleryProp) => {
-  console.log(images);
   const [selectedImage, setSelectedImage] = useState(images[0]);
 
   return (

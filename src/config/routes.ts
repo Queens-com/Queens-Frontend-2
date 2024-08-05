@@ -80,3 +80,11 @@ export const routes = {
     hermes: `${ROUTE_PREFIX.stores}/hermes`,
   },
 };
+
+export const protectedPages: string[] = [
+  routes.cart.index,
+  routes.profile,
+  routes.stores.index,
+];
+
+export const unprotectedPages = [routes.login, routes.register];

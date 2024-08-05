@@ -5,6 +5,7 @@ declare module "next-auth" {
   interface Session {
     user: User & DefaultSession["user"];
     accessToken?: string;
+    expiresIn: number;
     error?: string;
   }
 }

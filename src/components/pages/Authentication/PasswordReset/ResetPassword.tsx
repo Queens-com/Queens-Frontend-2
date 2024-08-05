@@ -43,7 +43,6 @@ const ResetPassword = () => {
       const body = {
         password: payload.password,
       };
-      console.log(body);
       const config: AxiosRequestConfig = code
         ? { headers: { Authorization: `Bearer ${code}` } }
         : {};
@@ -54,7 +53,6 @@ const ResetPassword = () => {
       });
       router.push(routes.resetSuccess);
     } catch (error) {
-      console.log(error);
       return error;
     }
   };

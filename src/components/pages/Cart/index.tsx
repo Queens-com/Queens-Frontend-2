@@ -19,7 +19,6 @@ export default function Cart() {
     },
   });
 
-  console.log(data, error);
   // if (isFetching || isLoading) {
   //   return (
   //     <main className="p-3 lg:px-14 md:px-10 mt-2 mb-10 w-full">

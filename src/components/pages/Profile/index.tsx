@@ -58,7 +58,10 @@ export default function Profile() {
                 uploading && "brightness-0 animate-pulse"
               }`}
             >
-              <AvatarImage src={data?.user?.profile_photo ?? undefined} />
+              <AvatarImage
+                src={data?.user?.profile_photo ?? undefined}
+                className="object-cover"
+              />
               <AvatarFallback className="text-black flex items-center justify-center text-center w-full h-full md:text-6xl text-4xl">
                 {data?.user ? getInitials(data.user) : "AA"}
               </AvatarFallback>

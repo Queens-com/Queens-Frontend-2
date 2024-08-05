@@ -23,7 +23,6 @@ const NewArrivals: React.FC = () => {
 
   // const products =
 
-  console.log(data, error);
   if (isLoading || isFetching) {
     return (
       <main className="md:px-24 space-y-8 p-4">

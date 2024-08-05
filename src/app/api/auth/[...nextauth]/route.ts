@@ -13,6 +13,15 @@ export const authOptions: AuthOptions = {
       if (user) {
         token.user = user?.data as User;
         token.accessToken = user?.accessToken as string;
+        token.expiresIn = (Date.now() +
+          (user?.expiresIn || 60) * 1000) as number;
+      }
+      if (token.expiresIn && Date.now() > token.expiresIn) {
+        token.error = "Token expired";
+        return {
+          ...token,
+          error: "Token expired",
+        };
       }
       return token;
     },
@@ -22,10 +31,14 @@ export const authOptions: AuthOptions = {
         ...session,
         accessToken: token?.accessToken,
         error: token?.error,
+        expiresIn: token?.expiresIn,
       };
     },
   },
   debug: ENVIRONMENT.development,
+  pages: {
+    signIn: routes.login,
+  },
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
@@ -43,6 +56,9 @@ export const authOptions: AuthOptions = {
           return {
             ...res.data,
             accessToken: credentials?.accessToken,
+            ...(credentials?.expiresIn
+              ? { expiresIn: +credentials?.expiresIn }
+              : {}),
           } as any;
         } catch (err) {
           const x = err as AxiosError<{ detail: string }>;
@@ -56,6 +72,11 @@ export const authOptions: AuthOptions = {
           label: "Access Token",
           placeholder: "Access Token",
           type: "text",
+        },
+        expiresIn: {
+          label: "Expires In",
+          placeholder: "Expires In",
+          type: "number",
         },
       },
       id: "update-jwt",
