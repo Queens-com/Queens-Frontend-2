@@ -3,6 +3,7 @@ const serviceRoot = {
   user: "/account",
   products: "/products",
   cart: "/cart",
+  payment: "/payment",
 };
 
 export const apiRoutes = {
@@ -47,6 +48,12 @@ export const apiRoutes = {
     get: `${serviceRoot.cart}/cart_content`,
     clear: `${serviceRoot.cart}/clear_cart`,
     update: `${serviceRoot.cart}/update_product_quantity`,
+  },
+  payment: {
+    paystack: {
+      index: `${serviceRoot.payment}/paystack`,
+      verify: `${serviceRoot.cart}/paystack/verify`,
+    },
   },
   upload: "/upload-profile-photo",
 };

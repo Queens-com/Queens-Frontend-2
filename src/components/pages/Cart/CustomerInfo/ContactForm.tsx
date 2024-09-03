@@ -37,11 +37,12 @@ export default function ContactForm({ contact, setInfo }: ContactProp) {
     resolver: yupResolver(contactSchema),
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = async (payload) => {
-    // console.log(payload);
-  };
   const handleClick = (status: boolean) => {
     setInfo({ contact: status, address: false, payment: false });
+  };
+  const onSubmit: SubmitHandler<FieldValues> = async (payload) => {
+    setInfo({ contact: false, address: true, payment: false });
+    // console.log(payload);
   };
 
   return (
@@ -75,7 +76,11 @@ export default function ContactForm({ contact, setInfo }: ContactProp) {
           <div className="flex justify-end mt-4 ">
             <button
               type="submit"
-              className="rounded-xl px-[10%] p-1 text-[#C6C6C6] bg-[#F5F5F5]"
+              className={` pt-2 pb-2 ps-4 pe-4 placeholder:font-normal placeholder:text-sm rounded-full ${
+                Object.keys(errors).length < 1
+                  ? "bg-[#1E1E1E] text-white"
+                  : "text-[#1E1E1E] bg-[#F5F5F5]"
+              }`}
             >
               Continue
             </button>

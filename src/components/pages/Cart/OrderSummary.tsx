@@ -7,14 +7,23 @@ import { CartType } from "@/types";
 import { calculateTotal } from "@/lib/utils";
 import { useDeleteCart, useGetCart } from "@/config/cart/useCart";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
+import usePaystack from "@/config/payment/usePaystack";
+import { snackbar } from "@/components/Toaster";
 
 interface OrderProp {
   check: boolean;
   cart: CartType[];
 }
 
+const url = process.env.NEXT_PUBLIC_URL as string;
+
 export default function OrderSummary({ check, cart }: OrderProp) {
   const queryClient = useQueryClient();
+  const searchParams = useSearchParams();
+  const pay = searchParams.get("pay");
+  const { paystackPay, paystackError, paystackLoading } = usePaystack();
+
   // const { refetch } = useGetCart();
 
   const {
@@ -32,6 +41,17 @@ export default function OrderSummary({ check, cart }: OrderProp) {
       queryClient.invalidateQueries({ queryKey: ["carts"] });
     },
   });
+
+  const handlePayment = () => {
+    if (pay === "paystack") {
+      paystackPay({ amount: `${calculateTotal(cart)}`, redirect_url: url });
+    } else {
+      snackbar.error({
+        description: "This payment method does not exist",
+        message: "Wrong Payment",
+      });
+    }
+  };
   // const deleteCart = () => {
   //   useDeleteCart();
   //   queryClient.invalidateQueries({ queryKey: ["carts"] });
@@ -86,10 +106,24 @@ export default function OrderSummary({ check, cart }: OrderProp) {
           <p>Total</p>
           <p>${calculateTotal(cart)}</p>
         </div>
-        <div className={`${check && "hidden"}  pt-4 w-full`}>
-          <button className="text-white bg-black rounded-xl w-full p-1">
-            <Link href={routes.cart.customer}>Checkout</Link>
-          </button>
+        <div className={`pt-4 w-full`}>
+          {check ? (
+            <button
+              disabled={pay ? false : true}
+              onClick={handlePayment}
+              className={` rounded-xl w-full p-1 ${
+                pay
+                  ? "text-white bg-black cursor-pointer"
+                  : "text-[#1E1E1E] bg-[#F5F5F5] cursor-not-allowed"
+              }`}
+            >
+              <p>{paystackLoading ? "Paying..." : "Pay"}</p>
+            </button>
+          ) : (
+            <button className="text-white bg-black rounded-xl w-full p-1">
+              <Link href={routes.cart.customer}>Checkout</Link>
+            </button>
+          )}
         </div>
       </section>
     </main>
