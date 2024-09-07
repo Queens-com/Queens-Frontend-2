@@ -44,7 +44,10 @@ export default function OrderSummary({ check, cart }: OrderProp) {
 
   const handlePayment = () => {
     if (pay === "paystack") {
-      paystackPay({ amount: `${calculateTotal(cart)}`, redirect_url: url });
+      paystackPay({
+        amount: `${calculateTotal(cart)}`,
+        redirect_url: url || "",
+      });
     } else {
       snackbar.error({
         description: "This payment method does not exist",
